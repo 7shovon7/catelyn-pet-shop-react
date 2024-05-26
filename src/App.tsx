@@ -36,7 +36,7 @@ function App() {
                     }}
                     templateColumns={{
                         base: "350px 1fr",
-                        md: "350px 1fr 1fr",
+                        // md: "350px 1fr 1fr",
                         lg: "450px 1fr 1fr",
                     }}
                     alignItems="center"
@@ -45,7 +45,16 @@ function App() {
                     <GridItem area="logo" paddingLeft={4}>
                         <Logo />
                     </GridItem>
-                    <GridItem area="nav" display="flex" justifyContent="center">
+                    <GridItem
+                        area="nav"
+                        display="flex"
+                        justifyContent={{
+                            base: "flex-end",
+                            // md: "flex-end",
+                            // lg: "flex-end",
+                            xl: "center",
+                        }}
+                    >
                         <NavMenu />
                     </GridItem>
                     <Show above="lg">

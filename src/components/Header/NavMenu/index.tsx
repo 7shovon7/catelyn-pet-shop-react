@@ -1,14 +1,56 @@
-import { HStack } from "@chakra-ui/react";
+import {
+    Drawer,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerOverlay,
+    HStack,
+    IconButton,
+    VStack,
+    useDisclosure,
+} from "@chakra-ui/react";
 import NavItems from "./NavItems";
+import { CiMenuFries } from "react-icons/ci";
+import Cart from "../Cart";
 
 const NavMenu = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
-        <HStack>
-            <NavItems text="Home" />
-            <NavItems text="Products" />
-            <NavItems text="Blog" />
-            <NavItems text="About Us" />
-        </HStack>
+        <>
+            {/* For larger screens */}
+            <HStack display={{ base: "none", md: "none", lg: "flex" }}>
+                <NavItems text="Home" />
+                <NavItems text="Products" />
+                <NavItems text="Blog" />
+                <NavItems text="About Us" />
+            </HStack>
+
+            {/* Hamburger menu for smaller screens */}
+            <IconButton
+                aria-label="Open Menu"
+                icon={<CiMenuFries />}
+                marginRight={10}
+                display={{ base: "flex", md: "flex", lg: "none" }}
+                onClick={onOpen}
+            />
+
+            <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton zIndex={100} />
+                    <DrawerBody>
+                        <VStack align="stretch" paddingTop={10}>
+                            <Cart />
+                            <NavItems text="Home" />
+                            <NavItems text="Products" />
+                            <NavItems text="Blog" />
+                            <NavItems text="About Us" />
+                        </VStack>
+                    </DrawerBody>
+                </DrawerContent>
+            </Drawer>
+        </>
     );
 };
 
