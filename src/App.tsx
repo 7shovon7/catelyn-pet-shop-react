@@ -1,6 +1,8 @@
 import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
-import Logo from "./components/Logo";
+import Logo from "./components/Header/Logo";
 import pawPattern from "./assets/paw-pattern.svg";
+import NavMenu from "./components/Header/NavMenu";
+import Cart from "./components/Header/Cart";
 
 function App() {
     return (
@@ -23,7 +25,7 @@ function App() {
                 backgroundColor="#17383E"
                 backgroundBlendMode="overlay"
                 display="flex"
-                flexDirection={{ base: "column", lg: "row" }}
+                flexDirection="row"
                 w="100%"
                 h={81}
             >
@@ -40,19 +42,20 @@ function App() {
                     alignItems="center"
                     w="100%"
                 >
-                    <GridItem area="logo">
+                    <GridItem area="logo" paddingLeft={4}>
                         <Logo />
                     </GridItem>
                     <GridItem area="nav" display="flex" justifyContent="center">
-                        Nav
+                        <NavMenu />
                     </GridItem>
                     <Show above="lg">
                         <GridItem
                             area="account"
                             display="flex"
                             justifyContent="flex-end"
+                            paddingRight={4}
                         >
-                            Cart
+                            <Cart />
                         </GridItem>
                     </Show>
                 </Grid>
