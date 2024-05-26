@@ -30,7 +30,7 @@ const NavMenu = () => {
             <IconButton
                 aria-label="Open Menu"
                 icon={<CiMenuFries />}
-                marginRight={10}
+                // marginRight={10}
                 display={{ base: "flex", md: "flex", lg: "none" }}
                 onClick={onOpen}
             />

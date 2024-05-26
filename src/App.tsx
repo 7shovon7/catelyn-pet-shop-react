@@ -1,6 +1,5 @@
 import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import Logo from "./components/Header/Logo";
-import pawPattern from "./assets/paw-pattern.svg";
 import NavMenu from "./components/Header/NavMenu";
 import Cart from "./components/Header/Cart";
 
@@ -18,8 +17,8 @@ function App() {
         >
             <Box
                 gridArea="header"
-                bgImage={pawPattern}
-                bgRepeat="no-repeat"
+                // bgImage={pawPattern}
+                // bgRepeat="no-repeat"
                 bgSize="cover"
                 bgPosition="center"
                 backgroundColor="#17383E"
@@ -40,9 +39,10 @@ function App() {
                         lg: "450px 1fr 1fr",
                     }}
                     alignItems="center"
+                    paddingX={10}
                     w="100%"
                 >
-                    <GridItem area="logo" paddingLeft={4}>
+                    <GridItem area="logo">
                         <Logo />
                     </GridItem>
                     <GridItem
@@ -62,7 +62,7 @@ function App() {
                             area="account"
                             display="flex"
                             justifyContent="flex-end"
-                            paddingRight={4}
+                            // paddingRight={4}
                         >
                             <Cart />
                         </GridItem>

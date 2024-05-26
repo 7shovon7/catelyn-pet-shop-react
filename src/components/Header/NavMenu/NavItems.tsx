@@ -5,7 +5,7 @@ interface Props {
 }
 
 const NavItems = ({ text }: Props) => {
-    return <Button borderRadius={4}>{text}</Button>;
+    return <Button borderRadius={2}>{text}</Button>;
 };
 
 export default NavItems;
