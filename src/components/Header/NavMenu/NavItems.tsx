@@ -1,11 +1,11 @@
-import { Button } from "@chakra-ui/react";
+import CButton from "../../Regular/CButton";
 
 interface Props {
     text: string;
 }
 
 const NavItems = ({ text }: Props) => {
-    return <Button borderRadius={2}>{text}</Button>;
+    return <CButton>{text}</CButton>;
 };
 
 export default NavItems;

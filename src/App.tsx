@@ -2,6 +2,7 @@ import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import Logo from "./components/Header/Logo";
 import NavMenu from "./components/Header/NavMenu";
 import Cart from "./components/Header/Cart";
+import MainBody from "./components/Body";
 
 function App() {
     return (
@@ -69,8 +70,8 @@ function App() {
                     </Show>
                 </Grid>
             </Box>
-            <GridItem area="main" bg="dodgerblue">
-                Main
+            <GridItem area="main">
+                <MainBody />
             </GridItem>
         </Grid>
     );
