@@ -21,7 +21,7 @@ const HeroSection = () => {
                         So what are you waiting for? Get quality products for
                         your furry friend along with helping the poor souls.
                     </Text>
-                    <CButton>Explore Now</CButton>
+                    <CButton>{`Explore Now`.toUpperCase()}</CButton>
                 </VStack>
             </GridItem>
             <GridItem

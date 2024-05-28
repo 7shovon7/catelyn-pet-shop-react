@@ -1,7 +1,10 @@
-import { Box, Text } from "@chakra-ui/react";
 import HeroSection from "./HeroSection";
 import OfferBanner from "./OfferBanner";
 import CategoryCards from "./CategoryCards";
+import AllProducts from "./AllProducts";
+import Testimonials from "./Testimonials";
+import AllBlogs from "./AllBlogs";
+import Footer from "../Footer";
 
 const MainBody = () => {
     return (
@@ -9,14 +12,10 @@ const MainBody = () => {
             <HeroSection />
             <OfferBanner />
             <CategoryCards />
-            <Box
-                display="flex"
-                justifyItems="center"
-                justifyContent="center"
-                paddingY="16px"
-            >
-                <Text fontSize="2xl">Exciting stuffs are coming...</Text>
-            </Box>
+            <AllProducts />
+            <Testimonials />
+            <AllBlogs />
+            <Footer />
         </>
     );
 };
