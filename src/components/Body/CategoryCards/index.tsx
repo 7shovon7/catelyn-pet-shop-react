@@ -12,13 +12,13 @@ const CategoryCards = () => {
                 <Text fontSize="4xl" fontWeight="bold">
                     Categories
                 </Text>
-                <Text>
+                <Text textAlign="justify">
                     Your cat deserves the bests!! From food to ball, we have it
                     all!!! Explore our collection of best Cat Supplies at
                     Unbeatable Prices!
                 </Text>
             </VStack>
-            <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4}>
+            <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={4}>
                 <CategoryCard imageSrc={petFoodIcon} title="Food" />
                 <CategoryCard imageSrc={litterBoxIcon} title="Litter" />
                 <CategoryCard
