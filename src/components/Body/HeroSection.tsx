@@ -7,7 +7,6 @@ const HeroSection = () => {
         <Grid
             templateAreas={{ base: `"left" "right"`, lg: `"left right"` }}
             templateColumns={{ base: "1fr", lg: "1fr 1fr" }}
-            paddingX={10}
             w="100%"
         >
             <GridItem area="left" marginTop={{ base: "20px", lg: "120px" }}>
@@ -37,7 +36,7 @@ const HeroSection = () => {
                     src={catImage}
                     position="absolute"
                     zIndex="1"
-                    boxSize="500px"
+                    boxSize={{ base: "350px", lg: "500px" }}
                     objectFit="cover"
                     paddingBottom="100px"
                 />
@@ -48,24 +47,24 @@ const HeroSection = () => {
                     justifyContent="center"
                 >
                     <Box
-                        w={{ base: "400px", md: "450px", lg: "520px" }}
-                        h={{ base: "400px", md: "450px", lg: "520px" }}
+                        w={{ base: "280px", md: "450px", lg: "520px" }}
+                        h={{ base: "280px", md: "450px", lg: "520px" }}
                         bg="black"
                         opacity="0.1"
                         borderRadius="50%"
                         position="absolute"
                     />
                     <Box
-                        w={{ base: "340px", md: "390px", lg: "450px" }}
-                        h={{ base: "340px", md: "390px", lg: "450px" }}
+                        w={{ base: "240px", md: "390px", lg: "450px" }}
+                        h={{ base: "240px", md: "390px", lg: "450px" }}
                         bg="black"
                         opacity="0.1"
                         borderRadius="50%"
                         position="absolute"
                     />
                     <Box
-                        w={{ base: "280px", md: "330px", lg: "380px" }}
-                        h={{ base: "280px", md: "330px", lg: "380px" }}
+                        w={{ base: "200px", md: "330px", lg: "380px" }}
+                        h={{ base: "200px", md: "330px", lg: "380px" }}
                         bg="black"
                         opacity="0.1"
                         borderRadius="50%"

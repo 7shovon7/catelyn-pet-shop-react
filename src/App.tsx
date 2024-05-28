@@ -35,12 +35,12 @@ function App() {
                         lg: `"logo nav account"`,
                     }}
                     templateColumns={{
-                        base: "350px 1fr",
-                        // md: "350px 1fr 1fr",
+                        base: "250px 1fr",
+                        md: "350px 1fr",
                         lg: "450px 1fr 1fr",
                     }}
                     alignItems="center"
-                    paddingX={10}
+                    paddingX={4}
                     w="100%"
                 >
                     <GridItem area="logo">
@@ -51,8 +51,6 @@ function App() {
                         display="flex"
                         justifyContent={{
                             base: "flex-end",
-                            // md: "flex-end",
-                            // lg: "flex-end",
                             xl: "center",
                         }}
                     >
@@ -63,7 +61,6 @@ function App() {
                             area="account"
                             display="flex"
                             justifyContent="flex-end"
-                            // paddingRight={4}
                         >
                             <Cart />
                         </GridItem>
