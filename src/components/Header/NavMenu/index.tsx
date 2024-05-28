@@ -12,18 +12,25 @@ import {
 import NavItems from "./NavItems";
 import { CiMenuFries } from "react-icons/ci";
 import Cart from "../Cart";
+import { ReactNode } from "react";
 
 const NavMenu = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const simpleNavMenu: ReactNode = (
+        <>
+            <NavItems text="Home" />
+            <NavItems text="Products" />
+            <NavItems text="Blog" />
+            <NavItems text="About Us" />
+        </>
+    );
 
     return (
         <>
             {/* For larger screens */}
             <HStack display={{ base: "none", md: "none", lg: "flex" }}>
-                <NavItems text="Home" />
-                <NavItems text="Products" />
-                <NavItems text="Blog" />
-                <NavItems text="About Us" />
+                {simpleNavMenu}
             </HStack>
 
             {/* Hamburger menu for smaller screens */}
@@ -42,10 +49,7 @@ const NavMenu = () => {
                     <DrawerBody>
                         <VStack align="stretch" paddingTop={10}>
                             <Cart />
-                            <NavItems text="Home" />
-                            <NavItems text="Products" />
-                            <NavItems text="Blog" />
-                            <NavItems text="About Us" />
+                            {simpleNavMenu}
                         </VStack>
                     </DrawerBody>
                 </DrawerContent>

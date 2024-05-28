@@ -5,8 +5,10 @@ const Cart = () => {
     return (
         <IconButton
             color="white"
-            bg="transparent"
+            bg="#17383E"
             aria-label={"Cart"}
+            borderRadius={2}
+            _hover={{ bg: "coral", borderRadius: 2 }}
             icon={<FaShoppingBasket size={36} />}
         />
     );

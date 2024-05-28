@@ -5,7 +5,11 @@ interface Props {
 }
 
 const NavItems = ({ text }: Props) => {
-    return <CButton>{text}</CButton>;
+    return (
+        <CButton bg="#17383E" hoverBg="coral">
+            {text}
+        </CButton>
+    );
 };
 
 export default NavItems;
