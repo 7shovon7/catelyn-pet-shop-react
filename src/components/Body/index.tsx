@@ -5,12 +5,7 @@ const MainBody = () => {
     return (
         <>
             <HeroSection />
-            <Box
-                marginTop={140}
-                display="flex"
-                justifyItems="center"
-                justifyContent="center"
-            >
+            <Box display="flex" justifyItems="center" justifyContent="center">
                 <Text fontSize="6xl">We're coming soon...</Text>
             </Box>
         </>

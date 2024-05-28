@@ -10,7 +10,7 @@ const HeroSection = () => {
             w="100%"
         >
             <GridItem area="left" marginTop={{ base: "20px", lg: "120px" }}>
-                <VStack spacing={4} align="flex-start" p={4}>
+                <VStack spacing={4} align="flex-start">
                     <Text fontSize="6xl" fontWeight="bold">
                         Our shop is what your pet wants!
                     </Text>
@@ -30,7 +30,18 @@ const HeroSection = () => {
                 alignItems="center"
                 justifyContent="center"
                 position="relative"
-                marginTop={{ base: "200px", lg: "120px" }}
+                marginTop={{
+                    base: "170px",
+                    sm: "180px",
+                    md: "240px",
+                    lg: "300px",
+                }}
+                marginBottom={{
+                    base: "170px",
+                    sm: "180px",
+                    md: "240px",
+                    lg: "300px",
+                }}
             >
                 <Image
                     src={catImage}

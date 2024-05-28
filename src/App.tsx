@@ -40,7 +40,14 @@ function App() {
                         lg: "450px 1fr 1fr",
                     }}
                     alignItems="center"
-                    paddingX={4}
+                    paddingX={{
+                        base: "12px",
+                        sm: "20px",
+                        md: "28px",
+                        lg: "36px",
+                        xl: "40",
+                        "2xl": "60",
+                    }}
                     w="100%"
                 >
                     <GridItem area="logo">
@@ -67,7 +74,17 @@ function App() {
                     </Show>
                 </Grid>
             </Box>
-            <GridItem area="main">
+            <GridItem
+                area="main"
+                paddingX={{
+                    base: "12px",
+                    sm: "20px",
+                    md: "28px",
+                    lg: "36px",
+                    xl: "40",
+                    "2xl": "60",
+                }}
+            >
                 <MainBody />
             </GridItem>
         </Grid>
