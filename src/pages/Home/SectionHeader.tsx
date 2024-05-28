@@ -1,5 +1,5 @@
 import { Flex, Text } from "@chakra-ui/react";
-import CButton from "../Regular/CButton";
+import CButton from "../../components/Regular/CButton";
 
 interface Props {
     title: string;

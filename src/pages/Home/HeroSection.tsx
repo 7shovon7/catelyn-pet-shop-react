@@ -1,5 +1,5 @@
 import { Box, Grid, GridItem, Image, Text, VStack } from "@chakra-ui/react";
-import CButton from "../Regular/CButton";
+import CButton from "../../components/Regular/CButton";
 import catImage from "../../assets/cat-in-banner.png";
 
 const HeroSection = () => {

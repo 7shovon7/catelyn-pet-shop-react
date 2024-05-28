@@ -1,5 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import ProductCard from "../../Regular/ProductCard";
+import ProductCard from "../../../components/Regular/ProductCard";
 import toysIcon from "../../../assets/categories/cat-toy.png";
 import SectionHeader from "../SectionHeader";
 

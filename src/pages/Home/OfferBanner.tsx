@@ -1,6 +1,6 @@
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { FaPaw } from "react-icons/fa";
-import CButton from "../Regular/CButton";
+import CButton from "../../components/Regular/CButton";
 
 const OfferBanner = () => {
     return (
