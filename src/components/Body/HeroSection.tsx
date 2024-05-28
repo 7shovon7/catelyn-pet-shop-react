@@ -47,7 +47,12 @@ const HeroSection = () => {
                     src={catImage}
                     position="absolute"
                     zIndex="1"
-                    boxSize={{ base: "350px", lg: "500px" }}
+                    boxSize={{
+                        base: "350px",
+                        sm: "400px",
+                        md: "470px",
+                        lg: "500px",
+                    }}
                     objectFit="cover"
                     paddingBottom="100px"
                 />
@@ -58,24 +63,54 @@ const HeroSection = () => {
                     justifyContent="center"
                 >
                     <Box
-                        w={{ base: "280px", md: "450px", lg: "520px" }}
-                        h={{ base: "280px", md: "450px", lg: "520px" }}
+                        w={{
+                            base: "280px",
+                            sm: "370px",
+                            md: "450px",
+                            lg: "520px",
+                        }}
+                        h={{
+                            base: "280px",
+                            sm: "370px",
+                            md: "450px",
+                            lg: "520px",
+                        }}
                         bg="black"
                         opacity="0.1"
                         borderRadius="50%"
                         position="absolute"
                     />
                     <Box
-                        w={{ base: "240px", md: "390px", lg: "450px" }}
-                        h={{ base: "240px", md: "390px", lg: "450px" }}
+                        w={{
+                            base: "240px",
+                            sm: "310px",
+                            md: "390px",
+                            lg: "450px",
+                        }}
+                        h={{
+                            base: "240px",
+                            sm: "310px",
+                            md: "390px",
+                            lg: "450px",
+                        }}
                         bg="black"
                         opacity="0.1"
                         borderRadius="50%"
                         position="absolute"
                     />
                     <Box
-                        w={{ base: "200px", md: "330px", lg: "380px" }}
-                        h={{ base: "200px", md: "330px", lg: "380px" }}
+                        w={{
+                            base: "200px",
+                            sm: "250px",
+                            md: "330px",
+                            lg: "380px",
+                        }}
+                        h={{
+                            base: "200px",
+                            sm: "250px",
+                            md: "330px",
+                            lg: "380px",
+                        }}
                         bg="black"
                         opacity="0.1"
                         borderRadius="50%"
