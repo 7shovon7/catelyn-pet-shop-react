@@ -65,13 +65,13 @@ const HeroSection = () => {
                     <Box
                         w={{
                             base: "280px",
-                            sm: "370px",
+                            sm: "340px",
                             md: "450px",
                             lg: "520px",
                         }}
                         h={{
                             base: "280px",
-                            sm: "370px",
+                            sm: "340px",
                             md: "450px",
                             lg: "520px",
                         }}
@@ -83,13 +83,13 @@ const HeroSection = () => {
                     <Box
                         w={{
                             base: "240px",
-                            sm: "310px",
+                            sm: "290px",
                             md: "390px",
                             lg: "450px",
                         }}
                         h={{
                             base: "240px",
-                            sm: "310px",
+                            sm: "290px",
                             md: "390px",
                             lg: "450px",
                         }}
@@ -101,7 +101,7 @@ const HeroSection = () => {
                     <Box
                         w={{
                             base: "200px",
-                            sm: "250px",
+                            sm: "230px",
                             md: "330px",
                             lg: "380px",
                         }}
