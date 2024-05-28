@@ -1,6 +1,6 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import SectionHeader from "../SectionHeader";
-import BlogCard from "../../Regular/BlogCard";
+import BlogCard from "../../../components/Regular/BlogCard";
 import earMitesImage from "../../../assets/ear-mites.jpg";
 
 const AllBlogs = () => {

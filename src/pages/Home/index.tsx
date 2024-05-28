@@ -4,7 +4,7 @@ import CategoryCards from "./CategoryCards";
 import AllProducts from "./AllProducts";
 import Testimonials from "./Testimonials";
 import AllBlogs from "./AllBlogs";
-import Footer from "../Footer";
+import Footer from "../../components/Footer";
 
 const MainBody = () => {
     return (

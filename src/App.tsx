@@ -2,7 +2,7 @@ import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import Logo from "./components/Header/Logo";
 import NavMenu from "./components/Header/NavMenu";
 import Cart from "./components/Header/Cart";
-import MainBody from "./components/Body";
+import MainBody from "./pages/Home";
 
 function App() {
     return (

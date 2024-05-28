@@ -7,7 +7,7 @@ const Cart = () => {
             color="white"
             bg="transparent"
             aria-label={"Cart"}
-            icon={<FaShoppingBasket size={40} />}
+            icon={<FaShoppingBasket size={36} />}
         />
     );
 };
