@@ -14,9 +14,7 @@ export interface Product {
     image: string;
     created_at: string;
     updated_at: string;
-    category: {
-        name: string;
-    } | null;
+    category: string | null;
 }
 
 export interface ProductResponse {
@@ -96,9 +94,7 @@ const ProductGrid: React.FC<AllProductsProps> = ({
                         title={product.title}
                         imageSrc={product.image}
                         price={product.price}
-                        category={
-                            product.category ? product.category.name : "Misc"
-                        }
+                        category={product.category ? product.category : "Misc"}
                     />
                 ))}
             </SimpleGrid>
