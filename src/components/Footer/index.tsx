@@ -13,7 +13,7 @@ const Footer = () => {
     const socialIcons: IconType[] = [MdAlternateEmail, FaFacebook, FaInstagram];
 
     return (
-        <Box bg="#17383E" paddingX={8} paddingY={12}>
+        <Box bg="#17383E" paddingX={8} paddingY={12} bottom={0} as="footer">
             <Flex
                 direction={{ base: "column", sm: "row" }}
                 justifyContent="space-around"
