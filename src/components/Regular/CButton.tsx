@@ -3,6 +3,8 @@ import { ReactNode } from "react";
 
 interface Props {
     children: ReactNode;
+    onClick?: () => void;
+    disabled?: boolean;
     bg?: string;
     textColor?: string;
     hoverBg?: string;
@@ -11,6 +13,8 @@ interface Props {
 
 const CButton = ({
     children,
+    onClick,
+    disabled = false,
     bg = "coral",
     textColor = "white",
     hoverBg = "#17383E",
@@ -18,10 +22,15 @@ const CButton = ({
 }: Props) => {
     return (
         <Button
+            onClick={onClick}
+            disabled={disabled}
             borderRadius={2}
-            bg={bg}
+            bg={disabled ? "grey" : bg}
             color={textColor}
-            _hover={{ bg: hoverBg, color: hoverTextColor }}
+            _hover={disabled ? {} : { bg: hoverBg, color: hoverTextColor }}
+            _disabled={{
+                cursor: "not-allowed",
+            }}
         >
             {children}
         </Button>
