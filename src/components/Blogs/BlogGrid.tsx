@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BlogCard from "./BlogCard";
 import CButton from "../Regular/CButton";
-import earMitesImage from "../../../assets/ear-mites.jpg";
+import earMitesImage from "../../assets/ear-mites.jpg";
 
 const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
 

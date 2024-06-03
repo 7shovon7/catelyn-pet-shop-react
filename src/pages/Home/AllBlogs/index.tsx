@@ -4,7 +4,7 @@ import BlogGrid from "../../../components/Blogs/BlogGrid";
 const AllBlogs = () => {
     return (
         <>
-            <SectionHeader title="Pet Blogs" />
+            <SectionHeader title="Pet Blogs" to="/blogs" />
             <BlogGrid />
         </>
     );
