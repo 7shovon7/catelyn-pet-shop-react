@@ -5,6 +5,7 @@ import Logo from "./components/Header/Logo";
 import NavMenu from "./components/Header/NavMenu";
 import Cart from "./components/Header/Cart";
 import Home from "./pages/Home";
+import Blogs from "./pages/Blogs";
 import Products from "./pages/Products";
 import Footer from "./components/Footer";
 
@@ -92,6 +93,7 @@ const App: React.FC = () => {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/products" element={<Products />} />
+                            <Route path="/blogs" element={<Blogs />} />
                         </Routes>
                     </GridItem>
                 </Grid>

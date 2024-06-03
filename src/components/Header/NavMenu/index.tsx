@@ -21,7 +21,7 @@ const NavMenu = () => {
         <>
             <NavItems text="Home" to="/" />
             <NavItems text="Products" to="/products" />
-            <NavItems text="Blog" to="/" />
+            <NavItems text="Blog" to="/blogs" />
             <NavItems text="About Us" to="/" />
         </>
     );
