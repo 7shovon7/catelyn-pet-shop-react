@@ -1,14 +1,14 @@
 // src/App.tsx
 import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Logo from "./components/Header/Logo";
-import NavMenu from "./components/Header/NavMenu";
-import Cart from "./components/Header/Cart";
-import Home from "./pages/Home";
-import Blogs from "./pages/Blogs";
-import Products from "./pages/Products";
-import Footer from "./components/Footer";
-import SingleBlogDetails from "./pages/Blogs/SingleBlogDetails";
+import Logo from "components/Header/Logo";
+import NavMenu from "components/Header/NavMenu";
+import Cart from "components/Header/Cart";
+import Home from "pages/Home";
+import Blogs from "pages/Blogs";
+import Products from "pages/Products";
+import Footer from "components/Footer";
+import SingleBlogDetails from "pages/Blogs/SingleBlogDetails";
 import { THEME_COLORS } from "misc/constants";
 
 const App: React.FC = () => {
@@ -80,6 +80,7 @@ const App: React.FC = () => {
                             </Show>
                         </Grid>
                     </Box>
+
                     <GridItem
                         area="main"
                         paddingX={{
