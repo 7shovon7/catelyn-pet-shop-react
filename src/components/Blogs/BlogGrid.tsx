@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BlogCard from "./BlogCard";
 import CButton from "../Regular/CButton";
-import earMitesImage from "../../assets/ear-mites.jpg";
+import blogPlaceHolderImage from "assets/blog/blog_img.webp";
+import { Link } from "react-router-dom";
 
 const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
 
 export interface BlogPost {
     id: number;
     title: string;
+    slug: string;
     content: string;
     created_at: string;
     updated_at: string;
@@ -88,16 +90,17 @@ const BlogGrid: React.FC<AllBlogsProps> = ({
                     const imageUrlMatch = blog.content.match(/!\[\]\((.*?)\)/);
                     const imageUrl = imageUrlMatch
                         ? `${BASE_API_URL}${imageUrlMatch[1]}`
-                        : earMitesImage;
+                        : blogPlaceHolderImage;
                     return (
-                        <BlogCard
-                            key={blog.id}
-                            title={blog.title}
-                            imageSrc={imageUrl}
-                            postedAt={new Date(
-                                blog.created_at
-                            ).toLocaleDateString()}
-                        />
+                        <Link key={blog.id} to={`/blogs/${blog.slug}`}>
+                            <BlogCard
+                                title={blog.title}
+                                imageSrc={imageUrl}
+                                postedAt={new Date(
+                                    blog.created_at
+                                ).toLocaleDateString()}
+                            />
+                        </Link>
                     );
                 })}
             </SimpleGrid>

@@ -1,8 +1,15 @@
 import { Box, Grid, GridItem, Image, Text, VStack } from "@chakra-ui/react";
 import CButton from "../../components/Regular/CButton";
 import catImage from "../../assets/cat-in-banner.png";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/products");
+    };
+
     return (
         <Grid
             templateAreas={{ base: `"left" "right"`, lg: `"left right"` }}
@@ -21,7 +28,9 @@ const HeroSection = () => {
                         So what are you waiting for? Get quality products for
                         your furry friend along with helping the poor souls.
                     </Text>
-                    <CButton>{`Explore Now`.toUpperCase()}</CButton>
+                    <CButton onClick={handleClick}>
+                        {`Explore Now`.toUpperCase()}
+                    </CButton>
                 </VStack>
             </GridItem>
             <GridItem
