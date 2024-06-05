@@ -11,13 +11,13 @@ import {
 } from "@chakra-ui/react";
 
 const ChakraMarkdownRenderers = {
-    h1: (props: any) => <Heading as="h1" size="xl" mt={4} mb={8} {...props} />,
-    h2: (props: any) => <Heading as="h2" size="lg" mt={4} mb={2} {...props} />,
-    h3: (props: any) => <Heading as="h3" size="md" mt={4} mb={2} {...props} />,
-    h4: (props: any) => <Heading as="h4" size="sm" mt={4} mb={2} {...props} />,
-    h5: (props: any) => <Heading as="h5" size="xs" mt={4} mb={2} {...props} />,
-    h6: (props: any) => <Heading as="h6" size="xs" mt={4} mb={2} {...props} />,
-    p: (props: any) => <Text mb={2} {...props} />,
+    h1: (props: any) => <Heading as="h1" size="xl" mt={8} mb={8} {...props} />,
+    h2: (props: any) => <Heading as="h2" size="lg" mt={8} mb={6} {...props} />,
+    h3: (props: any) => <Heading as="h3" size="md" mt={8} mb={6} {...props} />,
+    h4: (props: any) => <Heading as="h4" size="sm" mt={8} mb={6} {...props} />,
+    h5: (props: any) => <Heading as="h5" size="xs" mt={8} mb={6} {...props} />,
+    h6: (props: any) => <Heading as="h6" size="xs" mt={8} mb={6} {...props} />,
+    p: (props: any) => <Text mb={2} textAlign="justify" {...props} />,
     a: (props: any) => <Link color="teal.500" isExternal {...props} />,
     img: (props: any) => <Image mb={2} {...props} />,
     ul: (props: any) => <List styleType="disc" spacing={2} mb={2} {...props} />,

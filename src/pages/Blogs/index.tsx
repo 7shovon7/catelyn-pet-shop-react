@@ -1,7 +1,7 @@
 import { useState } from "react";
 import BlogGrid, { BlogPostResponseUI } from "../../components/Blogs/BlogGrid";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import BlogHero from "./BlogHero";
+import PageHeroSection from "components/Regular/PageHeroSection";
 
 const BlogMainBody = () => {
     const limit = 10;
@@ -18,7 +18,10 @@ const BlogMainBody = () => {
 
     return (
         <>
-            <BlogHero />
+            <PageHeroSection
+                pageTitle="Blogs"
+                breadcrumbs={[{ title: "Home", to: "/" }]}
+            />
             <Flex direction={{ base: "column", sm: "row" }}>
                 <Text fontSize="14px" paddingY="12px">
                     {`Showing 1-${resultsLength} of ${count} results`.toUpperCase()}

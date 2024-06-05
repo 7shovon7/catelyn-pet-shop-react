@@ -1,0 +1,40 @@
+import { Flex, HStack, Heading, Link, Text } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
+
+export interface BreadCrumb {
+    title: string;
+    to: string;
+}
+
+interface Props {
+    pageTitle: string;
+    breadcrumbs: BreadCrumb[];
+}
+
+const PageHeroSection = ({ pageTitle, breadcrumbs }: Props) => {
+    return (
+        <Flex
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            paddingY="32px"
+        >
+            <Heading fontSize="6xl" fontWeight="bold" textAlign="center" mb={8}>
+                {pageTitle}
+            </Heading>
+            <HStack>
+                {breadcrumbs.map((breadcrumb) => (
+                    <>
+                        <Link as={RouterLink} to={breadcrumb.to} color="coral">
+                            {breadcrumb.title.toUpperCase()}
+                        </Link>{" "}
+                        <Text> &gt; </Text>
+                    </>
+                ))}
+                <Text>{pageTitle.toUpperCase()}</Text>
+            </HStack>
+        </Flex>
+    );
+};
+
+export default PageHeroSection;
