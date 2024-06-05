@@ -1,5 +1,6 @@
 import { Flex, HStack, Heading, Link, Text } from "@chakra-ui/react";
 import { THEME_COLORS } from "misc/constants";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 export interface BreadCrumb {
@@ -24,8 +25,8 @@ const PageHeroSection = ({ pageTitle, breadcrumbs }: Props) => {
                 {pageTitle}
             </Heading>
             <HStack>
-                {breadcrumbs.map((breadcrumb) => (
-                    <>
+                {breadcrumbs.map((breadcrumb, index) => (
+                    <React.Fragment key={index}>
                         <Link
                             as={RouterLink}
                             to={breadcrumb.to}
@@ -34,7 +35,7 @@ const PageHeroSection = ({ pageTitle, breadcrumbs }: Props) => {
                             {breadcrumb.title.toUpperCase()}
                         </Link>{" "}
                         <Text> &gt; </Text>
-                    </>
+                    </React.Fragment>
                 ))}
                 <Text>{pageTitle.toUpperCase()}</Text>
             </HStack>

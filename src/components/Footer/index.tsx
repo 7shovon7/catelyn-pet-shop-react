@@ -63,8 +63,10 @@ const Footer = () => {
                     <Text color={THEME_COLORS.secondary} fontWeight="bold">
                         Categories
                     </Text>
-                    {categories.map((category) => (
-                        <Text color="white">{category}</Text>
+                    {categories.map((category, index) => (
+                        <Text key={index} color="white">
+                            {category}
+                        </Text>
                     ))}
                 </VStack>
                 <VStack>

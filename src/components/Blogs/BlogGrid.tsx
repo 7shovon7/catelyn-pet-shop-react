@@ -88,6 +88,7 @@ const BlogGrid: React.FC<AllBlogsProps> = ({
             >
                 {blogs.map((blog) => {
                     const imageUrlMatch = blog.content.match(/!\[\]\((.*?)\)/);
+                    console.log(imageUrlMatch);
                     const imageUrl = imageUrlMatch
                         ? `${BASE_API_URL}${imageUrlMatch[1]}`
                         : blogPlaceHolderImage;
