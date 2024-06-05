@@ -1,4 +1,5 @@
 import { Card, Image, Text, VStack } from "@chakra-ui/react";
+import { formatDate } from "utils/datetimeutil";
 
 interface Props {
     title: string;
@@ -8,14 +9,14 @@ interface Props {
 
 const BlogCard = ({ title, imageSrc, postedAt }: Props) => {
     return (
-        <Card paddingY={8}>
-            <VStack spacing={2}>
-                <Image src={imageSrc} h="100px" fit="cover" />
+        <Card paddingY={8} paddingX={4} minHeight="200px">
+            <VStack spacing={2} width="100%">
+                <Image src={imageSrc} w="100%" fit="cover" />
                 <Text fontSize={16} fontWeight="bold">
                     {title}
                 </Text>
                 <Text color="grey" fontSize={12}>
-                    {postedAt.toUpperCase()}
+                    {formatDate(postedAt).toUpperCase()}
                 </Text>
             </VStack>
         </Card>

@@ -4,7 +4,7 @@ import ProductGrid from "../../../components/Products/ProductGrid";
 const AllProducts = () => {
     return (
         <>
-            <SectionHeader title="FURRIES BEST CHOICE" to="/products" />
+            <SectionHeader title="Furries Best Choice" to="/products" />
             <ProductGrid />
         </>
     );

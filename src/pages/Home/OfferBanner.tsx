@@ -1,8 +1,15 @@
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { FaPaw } from "react-icons/fa";
 import CButton from "../../components/Regular/CButton";
+import { useNavigate } from "react-router-dom";
 
 const OfferBanner = () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/products");
+    };
+
     return (
         <Box bg="coral" borderRadius={2}>
             <Flex
@@ -27,7 +34,7 @@ const OfferBanner = () => {
                         Free delivery all over Dhaka!
                     </Text>
                 </VStack>
-                <CButton textColor="coral" bg="white">
+                <CButton onClick={handleClick} textColor="coral" bg="white">
                     Meow Meow
                 </CButton>
             </Flex>
