@@ -37,16 +37,7 @@ const SingleBlogDetails: React.FC = () => {
         : null;
 
     return (
-        <Box
-            paddingX={{
-                base: "12px",
-                sm: "20px",
-                md: "28px",
-                lg: "36px",
-                xl: "40",
-                "2xl": "60",
-            }}
-        >
+        <Box>
             <Heading as="h1" size="2xl" mt={8} mb={8} color="#17383E">
                 {blog.title}
             </Heading>
