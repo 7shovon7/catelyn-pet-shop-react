@@ -8,7 +8,7 @@ import {
     Text,
     VStack,
 } from "@chakra-ui/react";
-import { THEME_COLORS } from "misc/constants";
+import { COMPANY_DATA, THEME_COLORS } from "misc/constants";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { MdAlternateEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
@@ -17,32 +17,32 @@ const Footer = () => {
     const contacts = [
         {
             type: "phone",
-            value: "01800-072-072",
-            link: "tel:01800072072",
+            value: COMPANY_DATA.phoneDisplay,
+            link: `tel:${COMPANY_DATA.phoneClean}`,
             icon: MdPhone,
         },
         {
             type: "email",
-            value: "catelynpetshop@gmail.com",
-            link: "mailto:catelynpetshop@gmail.com",
+            value: COMPANY_DATA.email,
+            link: `mailto:${COMPANY_DATA.email}`,
             icon: MdAlternateEmail,
         },
         {
             type: "address",
-            value: "Bottola Railgate, Uttara, Dhaka",
-            link: "https://maps.app.goo.gl/1gKT7GnKxUueWpAz8",
+            value: COMPANY_DATA.address,
+            link: COMPANY_DATA.map,
             icon: MdLocationOn,
         },
     ];
     const socialIcons = [
-        { icon: MdAlternateEmail, link: "mailto:catelynpetshop@gmail.com" },
+        { icon: MdAlternateEmail, link: `mailto:${COMPANY_DATA.email}` },
         {
             icon: FaFacebook,
-            link: "https://www.facebook.com/profile.php?id=100071532367874",
+            link: COMPANY_DATA.social.fb.url,
         },
         {
             icon: FaInstagram,
-            link: "https://www.instagram.com/catelyn_pet_shop",
+            link: COMPANY_DATA.social.insta.url,
         },
     ];
 
@@ -92,7 +92,7 @@ const Footer = () => {
                     <Link key={index} href={social.link} isExternal>
                         <Icon
                             as={social.icon}
-                            color="white"
+                            color={THEME_COLORS.secondary}
                             width="50px"
                             height="50px"
                         />

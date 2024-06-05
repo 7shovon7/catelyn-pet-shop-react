@@ -1,5 +1,21 @@
 // src/misc/constants.ts
 
+export const COMPANY_DATA = {
+    phoneDisplay: "01800-072-072",
+    phoneClean: "01800-072-072",
+    email: "catelynpetshop@gmail.com",
+    address: "Sector 4, Uttara, Dhaka",
+    map: "https://maps.app.goo.gl/1gKT7GnKxUueWpAz8",
+    social: {
+        fb: {
+            url: "https://www.facebook.com/profile.php?id=100071532367874",
+        },
+        insta: {
+            url: "https://www.instagram.com/catelyn_pet_shop",
+        },
+    },
+};
+
 export const THEME_COLORS = {
     primary: "#17383E",
     secondary: "coral",
