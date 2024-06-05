@@ -1,4 +1,5 @@
 import { Button } from "@chakra-ui/react";
+import { THEME_COLORS } from "misc/constants";
 import { ReactNode } from "react";
 
 interface Props {
@@ -15,9 +16,9 @@ const CButton = ({
     children,
     onClick,
     disabled = false,
-    bg = "coral",
+    bg = THEME_COLORS.secondary,
     textColor = "white",
-    hoverBg = "#17383E",
+    hoverBg = THEME_COLORS.primary,
     hoverTextColor = "white",
 }: Props) => {
     return (

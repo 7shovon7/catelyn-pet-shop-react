@@ -8,6 +8,7 @@ import {
     Text,
     VStack,
 } from "@chakra-ui/react";
+import { THEME_COLORS } from "misc/constants";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { MdAlternateEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
@@ -46,14 +47,20 @@ const Footer = () => {
     ];
 
     return (
-        <Box bg="#17383E" paddingX={8} paddingY={12} bottom={0} as="footer">
+        <Box
+            bg={THEME_COLORS.primary}
+            paddingX={8}
+            paddingY={12}
+            bottom={0}
+            as="footer"
+        >
             <Flex
                 direction={{ base: "column", sm: "row" }}
                 justifyContent="space-around"
                 gap={8}
             >
                 <VStack>
-                    <Text color="coral" fontWeight="bold">
+                    <Text color={THEME_COLORS.secondary} fontWeight="bold">
                         Categories
                     </Text>
                     {categories.map((category) => (
@@ -61,7 +68,7 @@ const Footer = () => {
                     ))}
                 </VStack>
                 <VStack>
-                    <Text color="coral" fontWeight="bold">
+                    <Text color={THEME_COLORS.secondary} fontWeight="bold">
                         Contacts
                     </Text>
                     {contacts.map((contact, index) => (

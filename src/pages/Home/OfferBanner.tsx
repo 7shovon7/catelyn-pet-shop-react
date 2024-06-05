@@ -2,6 +2,7 @@ import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { FaPaw } from "react-icons/fa";
 import CButton from "../../components/Regular/CButton";
 import { useNavigate } from "react-router-dom";
+import { THEME_COLORS } from "misc/constants";
 
 const OfferBanner = () => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const OfferBanner = () => {
     };
 
     return (
-        <Box bg="coral" borderRadius={2}>
+        <Box bg={THEME_COLORS.secondary} borderRadius={2}>
             <Flex
                 direction={{ base: "column", md: "row" }}
                 justifyContent="space-between"
@@ -34,7 +35,11 @@ const OfferBanner = () => {
                         Free delivery all over Dhaka!
                     </Text>
                 </VStack>
-                <CButton onClick={handleClick} textColor="coral" bg="white">
+                <CButton
+                    onClick={handleClick}
+                    textColor={THEME_COLORS.secondary}
+                    bg="white"
+                >
                     Meow Meow
                 </CButton>
             </Flex>

@@ -9,6 +9,7 @@ import Blogs from "./pages/Blogs";
 import Products from "./pages/Products";
 import Footer from "./components/Footer";
 import SingleBlogDetails from "./pages/Blogs/SingleBlogDetails";
+import { THEME_COLORS } from "misc/constants";
 
 const App: React.FC = () => {
     return (
@@ -27,7 +28,7 @@ const App: React.FC = () => {
                         gridArea="header"
                         bgSize="cover"
                         bgPosition="center"
-                        backgroundColor="#17383E"
+                        backgroundColor={THEME_COLORS.primary}
                         backgroundBlendMode="overlay"
                         display="flex"
                         flexDirection="row"
