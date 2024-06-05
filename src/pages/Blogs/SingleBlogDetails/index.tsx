@@ -2,11 +2,12 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Heading, Text, Image } from "@chakra-ui/react";
+import { Box, Text, Image } from "@chakra-ui/react";
 import { BlogPost } from "components/Blogs/BlogGrid";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChakraMarkdownRenderers from "utils/markdownRenderers";
+import PageHeroSection from "components/Regular/PageHeroSection";
 
 const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
 
@@ -37,23 +38,29 @@ const SingleBlogDetails: React.FC = () => {
         : null;
 
     return (
-        <Box>
-            <Heading as="h1" size="2xl" mt={8} mb={8} color="#17383E">
-                {blog.title}
-            </Heading>
-            <Text mb={8}>
-                Posted on: {new Date(blog.created_at).toLocaleDateString()}
-            </Text>
-            {imageUrl && <Image src={imageUrl} alt={blog.title} />}
-            <Box mb={8}>
-                <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={ChakraMarkdownRenderers}
-                >
-                    {blog.content}
-                </ReactMarkdown>
+        <>
+            <PageHeroSection
+                pageTitle={blog.title}
+                breadcrumbs={[
+                    { title: "Home", to: "/" },
+                    { title: "Blogs", to: "/blogs" },
+                ]}
+            />
+            <Box>
+                <Text mb={8}>
+                    Posted on: {new Date(blog.created_at).toLocaleDateString()}
+                </Text>
+                {imageUrl && <Image src={imageUrl} alt={blog.title} />}
+                <Box mb={8}>
+                    <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={ChakraMarkdownRenderers}
+                    >
+                        {blog.content}
+                    </ReactMarkdown>
+                </Box>
             </Box>
-        </Box>
+        </>
     );
 };
 

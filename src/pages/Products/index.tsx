@@ -2,8 +2,8 @@ import { useState } from "react";
 import ProductGrid, {
     ProductResponseUI,
 } from "../../components/Products/ProductGrid";
-import ProductHero from "./ProductHero";
 import { Box, Flex, Text } from "@chakra-ui/react";
+import PageHeroSection from "components/Regular/PageHeroSection";
 
 const ProductMainBody = () => {
     const limit = 10;
@@ -20,7 +20,10 @@ const ProductMainBody = () => {
 
     return (
         <>
-            <ProductHero />
+            <PageHeroSection
+                pageTitle="Products"
+                breadcrumbs={[{ title: "Home", to: "/" }]}
+            />
             <Flex direction={{ base: "column", sm: "row" }}>
                 <Text fontSize="14px" paddingY="12px">
                     {`Showing 1-${resultsLength} of ${count} results`.toUpperCase()}
