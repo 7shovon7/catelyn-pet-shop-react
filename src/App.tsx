@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Blogs from "./pages/Blogs";
 import Products from "./pages/Products";
 import Footer from "./components/Footer";
+import SingleBlogDetails from "./pages/Blogs/SingleBlogDetails";
 
 const App: React.FC = () => {
     return (
@@ -94,6 +95,10 @@ const App: React.FC = () => {
                             <Route path="/" element={<Home />} />
                             <Route path="/products" element={<Products />} />
                             <Route path="/blogs" element={<Blogs />} />
+                            <Route
+                                path="/blogs/:slug"
+                                element={<SingleBlogDetails />}
+                            />
                         </Routes>
                     </GridItem>
                 </Grid>
