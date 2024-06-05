@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import CButton from "../../Regular/CButton";
+import { THEME_COLORS } from "misc/constants";
 
 interface Props {
     text: string;
@@ -13,7 +14,11 @@ const NavItems = ({ text, to }: Props) => {
         navigate(to);
     };
     return (
-        <CButton bg="#17383E" hoverBg="coral" onClick={handleClick}>
+        <CButton
+            bg={THEME_COLORS.primary}
+            hoverBg={THEME_COLORS.secondary}
+            onClick={handleClick}
+        >
             {text}
         </CButton>
     );

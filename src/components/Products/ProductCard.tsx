@@ -7,6 +7,7 @@ import {
     Text,
     VStack,
 } from "@chakra-ui/react";
+import { THEME_COLORS } from "misc/constants";
 import { FaPlus } from "react-icons/fa";
 
 interface Props {
@@ -27,7 +28,7 @@ const ProductCard = ({ title, imageSrc, price, category }: Props) => {
             </VStack>
             <Box position="absolute" top={2} left={2} textAlign="right">
                 {/* <Badge
-                    color="coral"
+                    color={THEME_COLORS.secondary}
                     // variant="solid"
                     verticalAlign="middle"
                     padding={2}
@@ -43,7 +44,7 @@ const ProductCard = ({ title, imageSrc, price, category }: Props) => {
             </Box>
             <Box position="absolute" top={0} right={-4} textAlign="right">
                 <Badge
-                    color="coral"
+                    color={THEME_COLORS.secondary}
                     // variant="solid"
                     verticalAlign="middle"
                     padding={2}
@@ -57,7 +58,7 @@ const ProductCard = ({ title, imageSrc, price, category }: Props) => {
                         <IconButton
                             aria-label="Add to cart"
                             icon={<FaPlus />}
-                            color="coral"
+                            color={THEME_COLORS.secondary}
                             variant="solid"
                             size="sm"
                         />

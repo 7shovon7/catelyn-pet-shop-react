@@ -1,4 +1,5 @@
 import { Image, Text, VStack } from "@chakra-ui/react";
+import { THEME_COLORS } from "misc/constants";
 
 interface Props {
     imageSrc: string;
@@ -13,7 +14,7 @@ const SinglePersonTestimonial = ({ imageSrc, text, location }: Props) => {
             <Text color="white" textAlign="center">
                 {text}
             </Text>
-            <Text color="coral">{location}</Text>
+            <Text color={THEME_COLORS.secondary}>{location}</Text>
         </VStack>
     );
 };

@@ -5,13 +5,17 @@ import BlogCard from "./BlogCard";
 import CButton from "../Regular/CButton";
 import blogPlaceHolderImage from "assets/blog/blog_img.webp";
 import { Link } from "react-router-dom";
-
-const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
+import {
+    checkAndGetCompleteUrl,
+    extractFirstImageUrl,
+    getCompleteUrl,
+} from "utils/misc";
 
 export interface BlogPost {
     id: number;
     title: string;
     slug: string;
+    featured_image: string;
     content: string;
     created_at: string;
     updated_at: string;
@@ -49,7 +53,9 @@ const BlogGrid: React.FC<AllBlogsProps> = ({
             try {
                 const offset = pagination ? (page - 1) * limit : 0;
                 const response = await axios.get(
-                    `${BASE_API_URL}/blog/posts/?limit=${limit}&offset=${offset}`
+                    getCompleteUrl(
+                        `/blog/posts/?limit=${limit}&offset=${offset}`
+                    )
                 );
                 const data: BlogPostResponse = response.data;
                 console.log(data);
@@ -87,10 +93,13 @@ const BlogGrid: React.FC<AllBlogsProps> = ({
                 marginY={4}
             >
                 {blogs.map((blog) => {
-                    const imageUrlMatch = blog.content.match(/!\[\]\((.*?)\)/);
-                    const imageUrl = imageUrlMatch
-                        ? `${BASE_API_URL}${imageUrlMatch[1]}`
-                        : blogPlaceHolderImage;
+                    const imageUrlMatch = extractFirstImageUrl(blog.content);
+                    const imageUrl =
+                        blog.featured_image !== null
+                            ? checkAndGetCompleteUrl(blog.featured_image)
+                            : imageUrlMatch
+                            ? imageUrlMatch
+                            : blogPlaceHolderImage;
                     return (
                         <Link key={blog.id} to={`/blogs/${blog.slug}`}>
                             <BlogCard
