@@ -5,6 +5,7 @@ import axios from "axios";
 import CategoryCard from "./CategoryCard";
 import { Category } from "misc/types/index";
 import { getCompleteUrl } from "utils/misc";
+import { Link } from "react-router-dom";
 
 const CategoryCards: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -45,11 +46,15 @@ const CategoryCards: React.FC = () => {
             </VStack>
             <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={4}>
                 {categories.map((category) => (
-                    <CategoryCard
+                    <Link
                         key={category.id}
-                        imageSrc={category.image}
-                        title={category.title}
-                    />
+                        to={`/products?category=${category.id}`}
+                    >
+                        <CategoryCard
+                            imageSrc={category.image}
+                            title={category.title}
+                        />
+                    </Link>
                 ))}
             </SimpleGrid>
         </>

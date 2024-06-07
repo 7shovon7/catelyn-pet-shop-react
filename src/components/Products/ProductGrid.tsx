@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
 import CButton from "../Regular/CButton";
 import { getCompleteUrl } from "utils/misc";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export interface Product {
     id: number;
@@ -43,14 +43,18 @@ const ProductGrid: React.FC<AllProductsProps> = ({
     const [products, setProducts] = useState<Product[]>([]);
     const [page, setPage] = useState<number>(1);
     const [count, setCount] = useState<number | null>(null);
+    const location = useLocation();
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const offset = pagination ? (page - 1) * limit : 0;
+                const params = new URLSearchParams(location.search);
+                const category = params.get("category");
+                const categoryFilter = category ? `&category=${category}` : "";
                 const response = await fetch(
                     getCompleteUrl(
-                        `/product/list/?limit=${limit}&offset=${offset}`
+                        `/product/list/?limit=${limit}&offset=${offset}${categoryFilter}`
                     )
                 );
                 if (!response.ok) {
