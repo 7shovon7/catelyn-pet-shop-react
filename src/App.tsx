@@ -10,6 +10,7 @@ import Products from "pages/Products";
 import Footer from "components/Footer";
 import SingleBlogDetails from "pages/Blogs/SingleBlogDetails";
 import { THEME_COLORS } from "misc/constants";
+import SingleProductDetails from "pages/Products/SingleProductDetails";
 
 const App: React.FC = () => {
     return (
@@ -96,6 +97,10 @@ const App: React.FC = () => {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/products" element={<Products />} />
+                            <Route
+                                path="/products/:id"
+                                element={<SingleProductDetails />}
+                            />
                             <Route path="/blogs" element={<Blogs />} />
                             <Route
                                 path="/blogs/:slug"

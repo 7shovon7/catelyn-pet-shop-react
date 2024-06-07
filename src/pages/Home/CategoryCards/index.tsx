@@ -1,11 +1,37 @@
+// src/pages/Categories/CategoryCards.tsx
+import { useEffect, useState } from "react";
 import { Text, SimpleGrid, VStack } from "@chakra-ui/react";
+import axios from "axios";
 import CategoryCard from "./CategoryCard";
-import petFoodIcon from "../../../assets/categories/pet-food.png";
-import litterBoxIcon from "../../../assets/categories/litter-box.png";
-import healthAndGroomingIcon from "../../../assets/categories/veterinary.png";
-import toysIcon from "../../../assets/categories/cat-toy.png";
+import { Category } from "misc/types/index";
+import { getCompleteUrl } from "utils/misc";
+import { Link } from "react-router-dom";
 
-const CategoryCards = () => {
+const CategoryCards: React.FC = () => {
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get(
+                    getCompleteUrl("/product/categories/")
+                );
+                setCategories(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+                setLoading(false);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
+    if (loading) {
+        return <Text>Loading...</Text>;
+    }
+
     return (
         <>
             <VStack justifyItems="center" paddingY="36px">
@@ -19,13 +45,17 @@ const CategoryCards = () => {
                 </Text>
             </VStack>
             <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={4}>
-                <CategoryCard imageSrc={petFoodIcon} title="Food" />
-                <CategoryCard imageSrc={litterBoxIcon} title="Litter" />
-                <CategoryCard
-                    imageSrc={healthAndGroomingIcon}
-                    title="Health & Grooming"
-                />
-                <CategoryCard imageSrc={toysIcon} title="Toys" />
+                {categories.map((category) => (
+                    <Link
+                        key={category.id}
+                        to={`/products?category=${category.id}`}
+                    >
+                        <CategoryCard
+                            imageSrc={category.image}
+                            title={category.title}
+                        />
+                    </Link>
+                ))}
             </SimpleGrid>
         </>
     );

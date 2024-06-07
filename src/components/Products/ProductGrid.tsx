@@ -2,8 +2,8 @@ import { Flex, HStack, SimpleGrid, Text } from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
 import CButton from "../Regular/CButton";
-
-const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
+import { getCompleteUrl } from "utils/misc";
+import { Link, useLocation } from "react-router-dom";
 
 export interface Product {
     id: number;
@@ -43,13 +43,19 @@ const ProductGrid: React.FC<AllProductsProps> = ({
     const [products, setProducts] = useState<Product[]>([]);
     const [page, setPage] = useState<number>(1);
     const [count, setCount] = useState<number | null>(null);
+    const location = useLocation();
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const offset = pagination ? (page - 1) * limit : 0;
+                const params = new URLSearchParams(location.search);
+                const category = params.get("category");
+                const categoryFilter = category ? `&category=${category}` : "";
                 const response = await fetch(
-                    `${BASE_API_URL}/product/list/?limit=${limit}&offset=${offset}`
+                    getCompleteUrl(
+                        `/product/list/?limit=${limit}&offset=${offset}${categoryFilter}`
+                    )
                 );
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
@@ -89,13 +95,17 @@ const ProductGrid: React.FC<AllProductsProps> = ({
                 marginY={4}
             >
                 {products.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        title={product.title}
-                        imageSrc={product.image}
-                        price={product.price}
-                        category={product.category ? product.category : "Misc"}
-                    />
+                    <Link key={product.id} to={`/products/${product.id}`}>
+                        <ProductCard
+                            // key={product.id}
+                            title={product.title}
+                            imageSrc={product.image}
+                            price={product.price}
+                            category={
+                                product.category ? product.category : "Misc"
+                            }
+                        />
+                    </Link>
                 ))}
             </SimpleGrid>
             {pagination && (
