@@ -23,7 +23,7 @@ const Cart = () => {
                 bg={THEME_COLORS.primary}
                 aria-label={"Cart"}
                 borderRadius={2}
-                _hover={{ bg: THEME_COLORS.secondary, borderRadius: 2 }}
+                _hover={{ color: THEME_COLORS.secondary, borderRadius: 2 }}
                 icon={<FaShoppingBasket size={36} />}
             />
             {totalItems > 0 && (

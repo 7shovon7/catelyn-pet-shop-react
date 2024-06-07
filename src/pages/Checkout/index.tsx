@@ -45,7 +45,7 @@ const Checkout: React.FC = () => {
                                     </VStack>
                                 </HStack>
                                 <Text>
-                                    ${(item.price * item.quantity).toFixed(2)}
+                                    ৳{(item.price * item.quantity).toFixed(2)}
                                 </Text>
                             </Flex>
                         ))}
@@ -61,7 +61,7 @@ const Checkout: React.FC = () => {
                             Total
                         </Text>
                         <Text fontSize="lg" fontWeight="bold">
-                            ${totalAmount.toFixed(2)}
+                            ৳{totalAmount.toFixed(2)}
                         </Text>
                     </Flex>
                     <CButton>Proceed to Confirm Order</CButton>
