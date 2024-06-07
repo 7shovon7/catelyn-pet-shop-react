@@ -14,13 +14,6 @@ import { FaPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
 
-// interface Props {
-//     title: string;
-//     imageSrc: string;
-//     price: number;
-//     category: string;
-// }
-
 interface Props {
     product: Product;
 }
