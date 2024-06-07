@@ -1,10 +1,23 @@
 // src/pages/Checkout/index.tsx
 
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
-import { Box, Flex, HStack, Image, Text, VStack } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "store";
+import {
+    Box,
+    Flex,
+    HStack,
+    Image,
+    Text,
+    VStack,
+    Button,
+} from "@chakra-ui/react";
 import CButton from "components/Regular/CButton";
+import {
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+} from "components/Order/cartSlice";
 
 const Checkout: React.FC = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -12,6 +25,7 @@ const Checkout: React.FC = () => {
         (total, item) => total + item.price * item.quantity,
         0
     );
+    const dispatch = useDispatch<AppDispatch>();
 
     return (
         <Box padding={8}>
@@ -41,7 +55,44 @@ const Checkout: React.FC = () => {
                                         <Text fontWeight="bold">
                                             {item.title}
                                         </Text>
-                                        <Text>Quantity: {item.quantity}</Text>
+                                        <HStack>
+                                            <Button
+                                                size="xs"
+                                                onClick={() =>
+                                                    dispatch(
+                                                        decreaseQuantity(
+                                                            item.id
+                                                        )
+                                                    )
+                                                }
+                                            >
+                                                -
+                                            </Button>
+                                            <Text>{item.quantity}</Text>
+                                            <Button
+                                                size="xs"
+                                                onClick={() =>
+                                                    dispatch(
+                                                        increaseQuantity(
+                                                            item.id
+                                                        )
+                                                    )
+                                                }
+                                            >
+                                                +
+                                            </Button>
+                                        </HStack>
+                                        <Button
+                                            size="xs"
+                                            colorScheme="red"
+                                            onClick={() =>
+                                                dispatch(
+                                                    removeFromCart(item.id)
+                                                )
+                                            }
+                                        >
+                                            Remove
+                                        </Button>
                                     </VStack>
                                 </HStack>
                                 <Text>
