@@ -51,7 +51,7 @@ const SingleProductDetails: React.FC = () => {
                         {product.title}
                     </Text>
                     <Text fontSize="lg" color="gray.700" mb={4}>
-                        ${product.price.toFixed(2)}
+                        ৳{product.price.toFixed(2)}
                     </Text>
                     <Text mb={8}>{product.description}</Text>
                     <CButton>Add to Cart</CButton>
