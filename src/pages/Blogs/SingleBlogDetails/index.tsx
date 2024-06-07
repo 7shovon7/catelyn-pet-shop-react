@@ -42,6 +42,16 @@ const SingleBlogDetails: React.FC = () => {
         );
     });
 
+    const urlRegex = /\[.*?\]\((.*?)\)/g;
+    const urlMatches = [...blog.content.matchAll(urlRegex)];
+    urlMatches.forEach((el) => {
+        // console.log(checkAndGetCompleteUrl(el[1]));
+        blog.content = blog.content.replace(
+            el[1],
+            checkAndGetCompleteUrl(el[1], false)
+        );
+    });
+
     return (
         <>
             <PageHeroSection
