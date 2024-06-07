@@ -1,34 +1,16 @@
 // src/pages/Categories/CategoryCards.tsx
-import { useEffect, useState } from "react";
 import { Text, SimpleGrid, VStack } from "@chakra-ui/react";
-import axios from "axios";
 import CategoryCard from "./CategoryCard";
-import { Category } from "misc/types/index";
-import { getCompleteUrl } from "utils/misc";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
 
 const CategoryCards: React.FC = () => {
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const { categories, status } = useSelector(
+        (state: RootState) => state.category
+    );
 
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await axios.get(
-                    getCompleteUrl("/product/categories/")
-                );
-                setCategories(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-                setLoading(false);
-            }
-        };
-
-        fetchCategories();
-    }, []);
-
-    if (loading) {
+    if (status === "loading") {
         return <Text>Loading...</Text>;
     }
 
