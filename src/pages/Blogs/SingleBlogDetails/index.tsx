@@ -2,13 +2,13 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Text, Image } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { BlogPost } from "components/Blogs/BlogGrid";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChakraMarkdownRenderers from "utils/markdownRenderers";
 import PageHeroSection from "components/Regular/PageHeroSection";
-import { getCompleteUrl } from "utils/misc";
+import { checkAndGetCompleteUrl, getCompleteUrl } from "utils/misc";
 
 const SingleBlogDetails: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -21,6 +21,7 @@ const SingleBlogDetails: React.FC = () => {
                     getCompleteUrl(`/blog/posts/${slug}/`)
                 );
                 setBlog(response.data);
+                console.log(response.data.content);
             } catch (error) {
                 console.error("Error fetching blog post:", error);
             }
@@ -31,8 +32,15 @@ const SingleBlogDetails: React.FC = () => {
 
     if (!blog) return <Text>Loading...</Text>;
 
-    const imageUrlMatch = blog.content.match(/!\[\]\((.*?)\)/);
-    const imageUrl = imageUrlMatch ? getCompleteUrl(imageUrlMatch[1]) : null;
+    const imageRegex = /!\[.*?\]\((.*?)\)/g;
+    const matches = [...blog.content.matchAll(imageRegex)];
+    matches.forEach((el) => {
+        // console.log(checkAndGetCompleteUrl(el[1]));
+        blog.content = blog.content.replace(
+            el[1],
+            checkAndGetCompleteUrl(el[1])
+        );
+    });
 
     return (
         <>
@@ -47,7 +55,7 @@ const SingleBlogDetails: React.FC = () => {
                 <Text mb={8}>
                     Posted on: {new Date(blog.created_at).toLocaleDateString()}
                 </Text>
-                {imageUrl && <Image src={imageUrl} alt={blog.title} />}
+                {/* {imageUrl && <Image src={imageUrl} alt={blog.title} />} */}
                 <Box mb={8}>
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm]}

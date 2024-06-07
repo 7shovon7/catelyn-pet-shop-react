@@ -98,11 +98,10 @@ const Footer = () => {
                     ) : (
                         categories.map((category) => (
                             <RouterLink
+                                key={category.id}
                                 to={`/products?category=${category.id}`}
                             >
-                                <Text key={category.id} color="white">
-                                    {category.title}
-                                </Text>
+                                <Text color="white">{category.title}</Text>
                             </RouterLink>
                         ))
                     )}
