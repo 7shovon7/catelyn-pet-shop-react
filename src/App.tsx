@@ -11,8 +11,18 @@ import Footer from "components/Footer";
 import SingleBlogDetails from "pages/Blogs/SingleBlogDetails";
 import { THEME_COLORS } from "misc/constants";
 import SingleProductDetails from "pages/Products/SingleProductDetails";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchCategories } from "components/Category/categorySlice";
+import { AppDispatch } from "store";
 
 const App: React.FC = () => {
+    const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch]);
+
     return (
         <Router>
             <Box display="flex" flexDirection="column" minHeight="100vh">
