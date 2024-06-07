@@ -12,14 +12,8 @@ import { THEME_COLORS } from "misc/constants";
 import { Product } from "misc/types";
 import { FaPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { AppDispatch } from "store";
-
-// interface Props {
-//     title: string;
-//     imageSrc: string;
-//     price: number;
-//     category: string;
-// }
 
 interface Props {
     product: Product;
@@ -37,23 +31,25 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     };
     return (
         <Card minHeight="300px" position="relative">
-            <VStack spacing={2} paddingBottom={4} paddingX={4}>
-                <Image src={product.image} fit="contain" height="250px" />
-                <Text fontSize={16} fontWeight="bold" textAlign="center">
-                    {product.title}
-                </Text>
-            </VStack>
+            <Link to={`/products/${product.id}`}>
+                <VStack spacing={2} paddingBottom={4} paddingX={4}>
+                    <Image src={product.image} fit="contain" height="250px" />
+                    <Text fontSize={16} fontWeight="bold" textAlign="center">
+                        {product.title}
+                    </Text>
+                </VStack>
+            </Link>
             <Box position="absolute" top={2} left={2} textAlign="right">
                 {/* <Badge
-                    color={THEME_COLORS.secondary}
-                    // variant="solid"
-                    verticalAlign="middle"
-                    padding={2}
-                    borderRadius="md"
-                    display="inline-block"
-                    fontSize="md"
-                    mb={1}
-                > */}
+                        color={THEME_COLORS.secondary}
+                        // variant="solid"
+                        verticalAlign="middle"
+                        padding={2}
+                        borderRadius="md"
+                        display="inline-block"
+                        fontSize="md"
+                        mb={1}
+                    > */}
                 <Text fontWeight="bold" fontSize="sm">
                     {product.category && product.category.toUpperCase()}
                 </Text>
@@ -62,7 +58,6 @@ const ProductCard: React.FC<Props> = ({ product }) => {
             <Box position="absolute" top={0} right={-4} textAlign="right">
                 <Badge
                     color={THEME_COLORS.secondary}
-                    // variant="solid"
                     verticalAlign="middle"
                     padding={2}
                     borderRadius="md"

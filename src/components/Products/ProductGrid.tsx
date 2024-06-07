@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
 import CButton from "../Regular/CButton";
 import { getCompleteUrl } from "utils/misc";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Product } from "misc/types";
 
 export interface ProductResponse {
@@ -84,9 +84,7 @@ const ProductGrid: React.FC<AllProductsProps> = ({
                 marginY={4}
             >
                 {products.map((product) => (
-                    <Link key={product.id} to={`/products/${product.id}`}>
-                        <ProductCard product={product} />
-                    </Link>
+                    <ProductCard key={product.id} product={product} />
                 ))}
             </SimpleGrid>
             {pagination && (
