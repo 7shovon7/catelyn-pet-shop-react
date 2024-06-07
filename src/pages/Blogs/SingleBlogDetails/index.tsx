@@ -8,8 +8,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChakraMarkdownRenderers from "utils/markdownRenderers";
 import PageHeroSection from "components/Regular/PageHeroSection";
-
-const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
+import { getCompleteUrl } from "utils/misc";
 
 const SingleBlogDetails: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -19,7 +18,7 @@ const SingleBlogDetails: React.FC = () => {
         const fetchBlog = async () => {
             try {
                 const response = await axios.get(
-                    `${BASE_API_URL}/blog/posts/${slug}/`
+                    getCompleteUrl(`/blog/posts/${slug}/`)
                 );
                 setBlog(response.data);
             } catch (error) {
@@ -33,9 +32,7 @@ const SingleBlogDetails: React.FC = () => {
     if (!blog) return <Text>Loading...</Text>;
 
     const imageUrlMatch = blog.content.match(/!\[\]\((.*?)\)/);
-    const imageUrl = imageUrlMatch
-        ? `${BASE_API_URL}${imageUrlMatch[1]}`
-        : null;
+    const imageUrl = imageUrlMatch ? getCompleteUrl(imageUrlMatch[1]) : null;
 
     return (
         <>

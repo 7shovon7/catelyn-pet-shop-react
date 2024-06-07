@@ -58,7 +58,6 @@ const BlogGrid: React.FC<AllBlogsProps> = ({
                     )
                 );
                 const data: BlogPostResponse = response.data;
-                console.log(data);
                 setBlogs(data.results);
                 setCount(data.count);
                 if (onDataFetched) {
