@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCategories } from "components/Category/categorySlice";
 import { AppDispatch } from "store";
+import Checkout from "pages/Checkout";
 
 const App: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -111,6 +112,7 @@ const App: React.FC = () => {
                                 path="/products/:id"
                                 element={<SingleProductDetails />}
                             />
+                            <Route path="/checkout" element={<Checkout />} />
                             <Route path="/blogs" element={<Blogs />} />
                             <Route
                                 path="/blogs/:slug"

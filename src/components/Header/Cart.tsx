@@ -5,6 +5,7 @@ import { THEME_COLORS } from "misc/constants";
 import { FaShoppingBasket } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
+import { Link as RouterLink } from "react-router-dom";
 
 const Cart = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -16,6 +17,8 @@ const Cart = () => {
     return (
         <Box position="relative">
             <IconButton
+                as={RouterLink}
+                to="/checkout"
                 color="white"
                 bg={THEME_COLORS.primary}
                 aria-label={"Cart"}
