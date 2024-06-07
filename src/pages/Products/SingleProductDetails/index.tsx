@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Text, Image, Flex } from "@chakra-ui/react";
 import PageHeroSection from "components/Regular/PageHeroSection";
-import { Product } from "components/Products/ProductGrid";
 import { getCompleteUrl } from "utils/misc";
 import CButton from "components/Regular/CButton";
+import { Product } from "misc/types";
 
 const SingleProductDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -51,7 +51,7 @@ const SingleProductDetails: React.FC = () => {
                         {product.title}
                     </Text>
                     <Text fontSize="lg" color="gray.700" mb={4}>
-                        ${product.price.toFixed(2)}
+                        ৳{product.price.toFixed(2)}
                     </Text>
                     <Text mb={8}>{product.description}</Text>
                     <CButton>Add to Cart</CButton>

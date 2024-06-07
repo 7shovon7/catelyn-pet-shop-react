@@ -7,23 +7,40 @@ import {
     Text,
     VStack,
 } from "@chakra-ui/react";
+import { addToCart } from "components/Order/cartSlice";
 import { THEME_COLORS } from "misc/constants";
+import { Product } from "misc/types";
 import { FaPlus } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "store";
+
+// interface Props {
+//     title: string;
+//     imageSrc: string;
+//     price: number;
+//     category: string;
+// }
 
 interface Props {
-    title: string;
-    imageSrc: string;
-    price: number;
-    category: string;
+    product: Product;
 }
 
-const ProductCard = ({ title, imageSrc, price, category }: Props) => {
+const ProductCard: React.FC<Props> = ({ product }) => {
+    const dispatch = useDispatch<AppDispatch>();
+
+    const handleAddToCart = () => {
+        const cartItem = {
+            ...product,
+            quantity: 1,
+        };
+        dispatch(addToCart(cartItem));
+    };
     return (
         <Card minHeight="300px" position="relative">
             <VStack spacing={2} paddingBottom={4} paddingX={4}>
-                <Image src={imageSrc} fit="contain" height="250px" />
+                <Image src={product.image} fit="contain" height="250px" />
                 <Text fontSize={16} fontWeight="bold" textAlign="center">
-                    {title}
+                    {product.title}
                 </Text>
             </VStack>
             <Box position="absolute" top={2} left={2} textAlign="right">
@@ -38,7 +55,7 @@ const ProductCard = ({ title, imageSrc, price, category }: Props) => {
                     mb={1}
                 > */}
                 <Text fontWeight="bold" fontSize="sm">
-                    {category.toUpperCase()}
+                    {product.category && product.category.toUpperCase()}
                 </Text>
                 {/* </Badge> */}
             </Box>
@@ -54,13 +71,14 @@ const ProductCard = ({ title, imageSrc, price, category }: Props) => {
                     mb={1}
                 >
                     <VStack>
-                        <Text>৳{price}</Text>
+                        <Text>৳{product.price}</Text>
                         <IconButton
                             aria-label="Add to cart"
                             icon={<FaPlus />}
                             color={THEME_COLORS.secondary}
                             variant="solid"
                             size="sm"
+                            onClick={handleAddToCart}
                         />
                     </VStack>
                 </Badge>

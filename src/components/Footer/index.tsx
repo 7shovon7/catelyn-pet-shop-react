@@ -8,38 +8,17 @@ import {
     Text,
     VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { COMPANY_DATA, THEME_COLORS } from "misc/constants";
-import { Category } from "misc/types";
-import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { MdAlternateEmail, MdLocationOn, MdPhone } from "react-icons/md";
-import { getCompleteUrl } from "utils/misc";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
 
 const Footer = () => {
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-    // const categories = ["Cat Food", "Cat Litter", "Health & Grooming", "Toy"];
-
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await axios.get(
-                    getCompleteUrl("/product/categories/")
-                );
-                setCategories(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching categories: ", error);
-                setError("Failed to load categories");
-                setLoading(false);
-            }
-        };
-
-        fetchCategories();
-    }, []);
+    const { categories, status, error } = useSelector(
+        (state: RootState) => state.category
+    );
 
     const contacts = [
         {
@@ -91,7 +70,7 @@ const Footer = () => {
                     <Text color={THEME_COLORS.secondary} fontWeight="bold">
                         Categories
                     </Text>
-                    {loading ? (
+                    {status === "loading" ? (
                         <Text color="white">Loading...</Text>
                     ) : error ? (
                         <Text color="red.500">{error}</Text>
