@@ -4,18 +4,7 @@ import { useEffect, useState } from "react";
 import CButton from "../Regular/CButton";
 import { getCompleteUrl } from "utils/misc";
 import { Link, useLocation } from "react-router-dom";
-
-export interface Product {
-    id: number;
-    title: string;
-    description: string;
-    price: number;
-    stock: number;
-    image: string;
-    created_at: string;
-    updated_at: string;
-    category: string | null;
-}
+import { Product } from "misc/types";
 
 export interface ProductResponse {
     count: number;
@@ -96,15 +85,7 @@ const ProductGrid: React.FC<AllProductsProps> = ({
             >
                 {products.map((product) => (
                     <Link key={product.id} to={`/products/${product.id}`}>
-                        <ProductCard
-                            // key={product.id}
-                            title={product.title}
-                            imageSrc={product.image}
-                            price={product.price}
-                            category={
-                                product.category ? product.category : "Misc"
-                            }
-                        />
+                        <ProductCard product={product} />
                     </Link>
                 ))}
             </SimpleGrid>

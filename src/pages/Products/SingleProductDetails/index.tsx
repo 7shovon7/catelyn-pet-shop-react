@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Text, Image, Flex } from "@chakra-ui/react";
 import PageHeroSection from "components/Regular/PageHeroSection";
-import { Product } from "components/Products/ProductGrid";
 import { getCompleteUrl } from "utils/misc";
 import CButton from "components/Regular/CButton";
+import { Product } from "misc/types";
 
 const SingleProductDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
