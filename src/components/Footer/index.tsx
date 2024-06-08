@@ -53,6 +53,10 @@ const Footer = () => {
         },
     ];
 
+    const isLoggedIn = () => {
+        return false;
+    };
+
     return (
         <Box
             bg={THEME_COLORS.primary}
@@ -84,6 +88,31 @@ const Footer = () => {
                             </RouterLink>
                         ))
                     )}
+                </VStack>
+                <VStack>
+                    <Text color={THEME_COLORS.secondary} fontWeight="bold">
+                        Account
+                    </Text>
+                    {!isLoggedIn() ? (
+                        <>
+                            <RouterLink to="/">
+                                <Text color="white">Login</Text>
+                            </RouterLink>
+                            <RouterLink to="/">
+                                <Text color="white">Register</Text>
+                            </RouterLink>
+                        </>
+                    ) : (
+                        <RouterLink to="/">
+                            <Text color="white">Logout</Text>
+                        </RouterLink>
+                    )}
+                    <RouterLink to="/checkout">
+                        <Text color="white">Cart</Text>
+                    </RouterLink>
+                    <RouterLink to="/checkout">
+                        <Text color="white">Orders</Text>
+                    </RouterLink>
                 </VStack>
                 <VStack>
                     <Text color={THEME_COLORS.secondary} fontWeight="bold">
