@@ -9,16 +9,26 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import { COMPANY_DATA, THEME_COLORS } from "misc/constants";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { MdAlternateEmail, MdLocationOn, MdPhone } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "store";
+import { logout } from "features/auth/authSlice";
 
 const Footer = () => {
     const { categories, status, error } = useSelector(
         (state: RootState) => state.category
     );
+
+    const { user } = useSelector((state: RootState) => state.auth);
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate("/");
+    };
 
     const contacts = [
         {
@@ -54,7 +64,7 @@ const Footer = () => {
     ];
 
     const isLoggedIn = () => {
-        return false;
+        return !!user;
     };
 
     return (
@@ -95,17 +105,21 @@ const Footer = () => {
                     </Text>
                     {!isLoggedIn() ? (
                         <>
-                            <RouterLink to="/">
+                            <RouterLink to="/login">
                                 <Text color="white">Login</Text>
                             </RouterLink>
-                            <RouterLink to="/">
+                            <RouterLink to="/signup">
                                 <Text color="white">Register</Text>
                             </RouterLink>
                         </>
                     ) : (
-                        <RouterLink to="/">
-                            <Text color="white">Logout</Text>
-                        </RouterLink>
+                        <Text
+                            color="white"
+                            cursor="pointer"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </Text>
                     )}
                     <RouterLink to="/checkout">
                         <Text color="white">Cart</Text>
