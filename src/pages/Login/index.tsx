@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     Box,
@@ -10,12 +10,22 @@ import {
 } from "@chakra-ui/react";
 import { login } from "features/auth/authSlice";
 import { RootState, AppDispatch } from "store";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { loading, error } = useSelector((state: RootState) => state.auth);
+    const { loading, error, user } = useSelector(
+        (state: RootState) => state.auth
+    );
+
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, [user, navigate]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -23,7 +33,7 @@ const Login: React.FC = () => {
     };
 
     return (
-        <Box maxW="md" mx="auto" mt={8} p={6} borderWidth={1} borderRadius="lg">
+        <Box maxW="md" mx="auto" my={8} p={6} borderWidth={1} borderRadius="lg">
             {error && (
                 <Alert status="error" mb={4}>
                     {error}
