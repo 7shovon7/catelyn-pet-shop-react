@@ -25,9 +25,14 @@ const Footer = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
+    const goToPageTop = () => {
+        window.scrollTo(0, 0);
+    };
+
     const handleLogout = () => {
         dispatch(logout());
         navigate("/");
+        goToPageTop();
     };
 
     const contacts = [
@@ -105,10 +110,10 @@ const Footer = () => {
                     </Text>
                     {!isLoggedIn() ? (
                         <>
-                            <RouterLink to="/login">
+                            <RouterLink to="/login" onClick={goToPageTop}>
                                 <Text color="white">Login</Text>
                             </RouterLink>
-                            <RouterLink to="/signup">
+                            <RouterLink to="/signup" onClick={goToPageTop}>
                                 <Text color="white">Register</Text>
                             </RouterLink>
                         </>
