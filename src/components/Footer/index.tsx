@@ -9,16 +9,31 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import { COMPANY_DATA, THEME_COLORS } from "misc/constants";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { MdAlternateEmail, MdLocationOn, MdPhone } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "store";
+import { logout } from "features/auth/authSlice";
 
 const Footer = () => {
     const { categories, status, error } = useSelector(
         (state: RootState) => state.category
     );
+
+    const { user } = useSelector((state: RootState) => state.auth);
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+
+    const goToPageTop = () => {
+        window.scrollTo(0, 0);
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate("/");
+        goToPageTop();
+    };
 
     const contacts = [
         {
@@ -53,6 +68,10 @@ const Footer = () => {
         },
     ];
 
+    const isLoggedIn = () => {
+        return !!user;
+    };
+
     return (
         <Box
             bg={THEME_COLORS.primary}
@@ -84,6 +103,35 @@ const Footer = () => {
                             </RouterLink>
                         ))
                     )}
+                </VStack>
+                <VStack>
+                    <Text color={THEME_COLORS.secondary} fontWeight="bold">
+                        Account
+                    </Text>
+                    {!isLoggedIn() ? (
+                        <>
+                            <RouterLink to="/login" onClick={goToPageTop}>
+                                <Text color="white">Login</Text>
+                            </RouterLink>
+                            <RouterLink to="/signup" onClick={goToPageTop}>
+                                <Text color="white">Register</Text>
+                            </RouterLink>
+                        </>
+                    ) : (
+                        <Text
+                            color="white"
+                            cursor="pointer"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </Text>
+                    )}
+                    <RouterLink to="/checkout">
+                        <Text color="white">Cart</Text>
+                    </RouterLink>
+                    <RouterLink to="/checkout">
+                        <Text color="white">Orders</Text>
+                    </RouterLink>
                 </VStack>
                 <VStack>
                     <Text color={THEME_COLORS.secondary} fontWeight="bold">

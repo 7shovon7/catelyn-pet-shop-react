@@ -16,12 +16,38 @@ import { useEffect } from "react";
 import { fetchCategories } from "components/Category/categorySlice";
 import { AppDispatch } from "store";
 import Checkout from "pages/Checkout";
+import Login from "pages/Login";
+import Signup from "pages/Signup";
+import axios from "axios";
+import { getCompleteUrl } from "utils/misc";
+import { setUser } from "features/auth/authSlice";
 
 const App: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         dispatch(fetchCategories());
+
+        const loadUser = async () => {
+            const accessToken = localStorage.getItem("accessToken");
+            console.log(accessToken);
+            if (accessToken) {
+                console.log("Access token found!");
+                try {
+                    const response = await axios.get(
+                        getCompleteUrl("/auth/users/me/"),
+                        {
+                            headers: { Authorization: `JWT ${accessToken}` },
+                        }
+                    );
+                    dispatch(setUser(response.data));
+                } catch (error) {
+                    console.error("Failed to load user", error);
+                }
+            }
+        };
+
+        loadUser();
     }, [dispatch]);
 
     return (
@@ -118,6 +144,8 @@ const App: React.FC = () => {
                                 path="/blogs/:slug"
                                 element={<SingleBlogDetails />}
                             />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<Signup />} />
                         </Routes>
                     </GridItem>
                 </Grid>
