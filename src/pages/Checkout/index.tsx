@@ -1,5 +1,3 @@
-// src/pages/Checkout/index.tsx
-
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "store";
@@ -17,7 +15,10 @@ import {
     increaseQuantity,
     decreaseQuantity,
     removeFromCart,
+    clearCart,
 } from "components/Order/cartSlice";
+import { useNavigate } from "react-router-dom";
+import api, { Order, OrderItem } from "features/order/api";
 
 const Checkout: React.FC = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -26,6 +27,32 @@ const Checkout: React.FC = () => {
         0
     );
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+    const token = localStorage.getItem("accessToken");
+
+    const handleCheckout = async () => {
+        const orderData: Order = {
+            items: cartItems.map(
+                (item): OrderItem => ({
+                    product: item.id,
+                    quantity: item.quantity,
+                    price: item.price,
+                })
+            ),
+        };
+
+        if (token) {
+            try {
+                await api.createOrder(orderData, token);
+                dispatch(clearCart());
+                navigate("/order-success");
+            } catch (error) {
+                console.error("Error creating order", error);
+            }
+        } else {
+            console.error("No access token found");
+        }
+    };
 
     return (
         <Box padding={8}>
@@ -115,7 +142,9 @@ const Checkout: React.FC = () => {
                             ৳{totalAmount.toFixed(2)}
                         </Text>
                     </Flex>
-                    <CButton>Proceed to Confirm Order</CButton>
+                    <CButton onClick={handleCheckout}>
+                        Proceed to Confirm Order
+                    </CButton>
                 </>
             )}
         </Box>
