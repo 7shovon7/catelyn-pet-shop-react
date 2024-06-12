@@ -21,6 +21,9 @@ import Signup from "pages/Signup";
 import axios from "axios";
 import { getCompleteUrl } from "utils/misc";
 import { setUser } from "features/auth/authSlice";
+import OrderHistory from "pages/OrderHistory";
+import OrderDetails from "pages/OrderDetails";
+import ThankYouPage from "pages/ThankYouPage";
 
 const App: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -146,6 +149,15 @@ const App: React.FC = () => {
                             />
                             <Route path="/login" element={<Login />} />
                             <Route path="/signup" element={<Signup />} />
+                            <Route path="/orders" element={<OrderHistory />} />
+                            <Route
+                                path="/orders/:id"
+                                element={<OrderDetails />}
+                            />
+                            <Route
+                                path="/thank-you"
+                                element={<ThankYouPage />}
+                            />
                         </Routes>
                     </GridItem>
                 </Grid>
