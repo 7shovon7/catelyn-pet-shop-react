@@ -18,7 +18,7 @@ import {
     clearCart,
 } from "components/Order/cartSlice";
 import { useNavigate } from "react-router-dom";
-import api, { Order, OrderItem } from "features/order/api";
+import api, { OrderItemInput } from "features/order/api";
 
 const Checkout: React.FC = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -31,9 +31,9 @@ const Checkout: React.FC = () => {
     const token = localStorage.getItem("accessToken");
 
     const handleCheckout = async () => {
-        const orderData: Order = {
+        const orderData = {
             items: cartItems.map(
-                (item): OrderItem => ({
+                (item): OrderItemInput => ({
                     product: item.id,
                     quantity: item.quantity,
                     price: item.price,
@@ -43,9 +43,10 @@ const Checkout: React.FC = () => {
 
         if (token) {
             try {
-                await api.createOrder(orderData, token);
+                const response = await api.createOrder(orderData, token);
+                const orderId = response.data.id;
                 dispatch(clearCart());
-                navigate("/order-success");
+                navigate(`/thank-you?order_id=${orderId}`);
             } catch (error) {
                 console.error("Error creating order", error);
             }

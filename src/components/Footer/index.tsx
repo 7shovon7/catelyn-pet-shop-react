@@ -129,7 +129,7 @@ const Footer = () => {
                     <RouterLink to="/checkout">
                         <Text color="white">Cart</Text>
                     </RouterLink>
-                    <RouterLink to="/checkout">
+                    <RouterLink to="/orders">
                         <Text color="white">Orders</Text>
                     </RouterLink>
                 </VStack>
