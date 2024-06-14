@@ -7,6 +7,9 @@ import PageHeroSection from "components/Regular/PageHeroSection";
 import { getCompleteUrl } from "utils/misc";
 import CButton from "components/Regular/CButton";
 import { Product } from "misc/types";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import ChakraMarkdownRenderers from "utils/markdownRenderers";
 
 const SingleProductDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -53,7 +56,14 @@ const SingleProductDetails: React.FC = () => {
                     <Text fontSize="lg" color="gray.700" mb={4}>
                         ৳{product.price.toFixed(2)}
                     </Text>
-                    <Text mb={8}>{product.description}</Text>
+                    <Box mb={8}>
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={ChakraMarkdownRenderers}
+                        >
+                            {product.description}
+                        </ReactMarkdown>
+                    </Box>
                     <CButton>Add to Cart</CButton>
                 </Box>
             </Flex>
