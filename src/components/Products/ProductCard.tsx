@@ -40,6 +40,19 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 </VStack>
             </Link>
             <Box position="absolute" top={2} left={2} textAlign="right">
+                {product.categories.map((category) => (
+                    <Badge
+                        key={category.id}
+                        color={THEME_COLORS.secondary}
+                        padding={2}
+                        borderRadius="md"
+                        display="inline-block"
+                        fontSize="sm"
+                        mb={1}
+                    >
+                        {category.title.toUpperCase()}
+                    </Badge>
+                ))}
                 {/* <Badge
                         color={THEME_COLORS.secondary}
                         // variant="solid"
@@ -50,9 +63,9 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                         fontSize="md"
                         mb={1}
                     > */}
-                <Text fontWeight="bold" fontSize="sm">
+                {/* <Text fontWeight="bold" fontSize="sm">
                     {product.category && product.category.toUpperCase()}
-                </Text>
+                </Text> */}
                 {/* </Badge> */}
             </Box>
             <Box position="absolute" top={0} right={-4} textAlign="right">

@@ -1,4 +1,4 @@
-// src/types/index.ts
+// src/misc/types/index.ts
 export interface Category {
     id: number;
     title: string;
@@ -13,9 +13,13 @@ export interface Product {
     title: string;
     description: string;
     price: number;
-    stock: number;
+    discounted_price: number;
+    available_stock: number;
+    total_sold: number;
+    size: number;
+    size_unit: string;
+    categories: Category[];
     image: string;
     created_at: string;
     updated_at: string;
-    category: string | null;
 }

@@ -39,11 +39,13 @@ const ProductGrid: React.FC<AllProductsProps> = ({
             try {
                 const offset = pagination ? (page - 1) * limit : 0;
                 const params = new URLSearchParams(location.search);
-                const category = params.get("category");
-                const categoryFilter = category ? `&category=${category}` : "";
+                const categories = params.get("categories");
+                const categoriesFilter = categories
+                    ? `&categories=${categories}`
+                    : "";
                 const response = await fetch(
                     getCompleteUrl(
-                        `/product/list/?limit=${limit}&offset=${offset}${categoryFilter}`
+                        `/product/list/?limit=${limit}&offset=${offset}${categoriesFilter}`
                     )
                 );
                 if (!response.ok) {
