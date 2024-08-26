@@ -30,7 +30,7 @@ const CategoryCards: React.FC = () => {
                 {categories.map((category) => (
                     <Link
                         key={category.id}
-                        to={`/products?category=${category.id}`}
+                        to={`/products?categories=${category.id}`}
                     >
                         <CategoryCard
                             imageSrc={category.image}
