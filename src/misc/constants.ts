@@ -4,8 +4,22 @@ export const COMPANY_DATA = {
     phoneDisplay: "01800-072-072",
     phoneClean: "01800-072-072",
     email: "catelynpetshop@gmail.com",
-    address: "Sector 4, Uttara, Dhaka",
-    map: "https://maps.app.goo.gl/1gKT7GnKxUueWpAz8",
+    // address: "Sector 4, Uttara, Dhaka",
+    // map: "https://maps.app.goo.gl/1gKT7GnKxUueWpAz8",
+    locations: [
+        {
+            address: "Sector 4, Uttara, Dhaka",
+            map: "https://maps.app.goo.gl/zs16JK4DtDQEfLsQ9",
+        },
+        {
+            address: "Baganbari, Matikata, Dhaka",
+            map: "https://maps.app.goo.gl/njisjwBXmw3eGje27",
+        },
+        {
+            address: "Radio Colony, Savar, Dhaka",
+            map: "https://maps.app.goo.gl/vTybaWS5HBi26pUN6",
+        },
+    ],
     social: {
         fb: {
             url: "https://www.facebook.com/profile.php?id=100071532367874",

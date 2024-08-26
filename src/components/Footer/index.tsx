@@ -48,12 +48,6 @@ const Footer = () => {
             link: `mailto:${COMPANY_DATA.email}`,
             icon: MdAlternateEmail,
         },
-        {
-            type: "address",
-            value: COMPANY_DATA.address,
-            link: COMPANY_DATA.map,
-            icon: MdLocationOn,
-        },
     ];
 
     const socialIcons = [
@@ -148,6 +142,19 @@ const Footer = () => {
                         >
                             <Icon as={contact.icon} />
                             <Text>{contact.value}</Text>
+                        </HStack>
+                    ))}
+                    {COMPANY_DATA.locations.map((location, index) => (
+                        <HStack
+                            key={index}
+                            as={Link}
+                            href={location.map}
+                            color="white"
+                            isExternal
+                            spacing={2}
+                        >
+                            <Icon as={MdLocationOn} />
+                            <Text>{location.address}</Text>
                         </HStack>
                     ))}
                 </VStack>
