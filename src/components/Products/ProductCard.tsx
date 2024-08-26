@@ -24,7 +24,16 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 
     const handleAddToCart = () => {
         const cartItem = {
-            ...product,
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            categories:
+                product.categories.length > 1
+                    ? `${product.categories[0].title} & ${
+                          product.categories.length - 1
+                      } more`
+                    : product.categories[0]?.title || null,
             quantity: 1,
         };
         dispatch(addToCart(cartItem));
