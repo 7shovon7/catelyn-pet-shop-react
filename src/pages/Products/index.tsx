@@ -6,7 +6,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import PageHeroSection from "components/Regular/PageHeroSection";
 
 const ProductMainBody = () => {
-    const limit = 10;
+    const limit = 50;
     const [count, setCount] = useState<number | null>(null);
     const [resultsLength, setResultsLength] = useState<number>(0);
 
