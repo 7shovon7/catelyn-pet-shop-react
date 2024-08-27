@@ -15,7 +15,7 @@ export const fetchCategories = createAsyncThunk(
     "category/fetchCategories",
     async () => {
         const response = await axios.get(
-            getCompleteUrl("/product/categories/")
+            getCompleteUrl("/shop_settings/categories/")
         );
         return response.data as Category[];
     }
