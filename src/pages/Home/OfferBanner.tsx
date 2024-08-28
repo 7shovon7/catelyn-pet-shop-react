@@ -29,10 +29,10 @@ const OfferBanner = () => {
                         fontWeight="bold"
                         textAlign="center"
                     >
-                        Get 10% OFF on your first order!
+                        Get 10% OFF on your order for helping
                     </Text>
                     <Text color="white" fontSize="lg" textAlign="center">
-                        Free delivery all over Dhaka!
+                        flood affected people!
                     </Text>
                 </VStack>
                 <CButton
