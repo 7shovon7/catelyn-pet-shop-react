@@ -1,18 +1,18 @@
 // src/pages/Categories/CategoryCards.tsx
 import { Text, SimpleGrid, VStack } from "@chakra-ui/react";
-import CategoryCard from "./CategoryCard";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
+// import CategoryCard from "./CategoryCard";
+// import { Link } from "react-router-dom";
+// import { useSelector } from "react-redux";
+// import { RootState } from "store";
 
 const CategoryCards: React.FC = () => {
-    const { categories, status } = useSelector(
-        (state: RootState) => state.category
-    );
+    // const { categories, status } = useSelector(
+    //     (state: RootState) => state.category
+    // );
 
-    if (status === "loading") {
-        return <Text>Loading...</Text>;
-    }
+    // if (status === "loading") {
+    //     return <Text>Loading...</Text>;
+    // }
 
     return (
         <>
@@ -27,7 +27,7 @@ const CategoryCards: React.FC = () => {
                 </Text>
             </VStack>
             <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={4}>
-                {categories.map((category) => (
+                {/* {categories.map((category) => (
                     <Link
                         key={category.id}
                         to={`/products?categories=${category.id}`}
@@ -37,7 +37,7 @@ const CategoryCards: React.FC = () => {
                             title={category.title}
                         />
                     </Link>
-                ))}
+                ))} */}
             </SimpleGrid>
         </>
     );

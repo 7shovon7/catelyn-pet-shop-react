@@ -1,14 +1,8 @@
 // src/features/category/categorySlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Category } from "misc/types";
 import { getCompleteUrl } from "utils/misc";
-
-interface CategoryState {
-    categories: Category[];
-    status: "idle" | "loading" | "succeeded" | "failed";
-    error: string | null;
-}
+import { Category, CategoryState } from "features/product/types";
 
 // Thunk to fetch categories
 export const fetchCategories = createAsyncThunk(

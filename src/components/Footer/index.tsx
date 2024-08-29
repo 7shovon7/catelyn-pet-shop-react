@@ -14,12 +14,12 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { MdAlternateEmail, MdLocationOn, MdPhone } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "store";
-import { logout } from "features/auth/authSlice";
+import { logout } from "features/auth/slice";
 
 const Footer = () => {
-    const { categories, status, error } = useSelector(
-        (state: RootState) => state.category
-    );
+    // const { categories, status, error } = useSelector(
+    //     (state: RootState) => state.category
+    // );
 
     const { user } = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch<AppDispatch>();
@@ -83,7 +83,7 @@ const Footer = () => {
                     <Text color={THEME_COLORS.secondary} fontWeight="bold">
                         Categories
                     </Text>
-                    {status === "loading" ? (
+                    {/* {status === "loading" ? (
                         <Text color="white">Loading...</Text>
                     ) : error ? (
                         <Text color="red.500">{error}</Text>
@@ -96,7 +96,7 @@ const Footer = () => {
                                 <Text color="white">{category.title}</Text>
                             </RouterLink>
                         ))
-                    )}
+                    )} */}
                 </VStack>
                 <VStack>
                     <Text color={THEME_COLORS.secondary} fontWeight="bold">
