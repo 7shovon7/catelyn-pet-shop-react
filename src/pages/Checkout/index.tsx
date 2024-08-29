@@ -1,24 +1,24 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "store";
+// import { useDispatch, useSelector } from "react-redux";
+// import { RootState, AppDispatch } from "store";
 import {
     Box,
-    Flex,
-    HStack,
-    Image,
+    // Flex,
+    // HStack,
+    // Image,
     Text,
-    VStack,
-    Button,
+    // VStack,
+    // Button,
 } from "@chakra-ui/react";
-import CButton from "components/Regular/CButton";
-import {
-    increaseQuantity,
-    decreaseQuantity,
-    removeFromCart,
-    clearCart,
-} from "components/Order/cartSlice";
-import { useNavigate } from "react-router-dom";
-import api, { OrderItemInput } from "features/order/api";
+// import CButton from "components/Regular/CButton";
+// import {
+//     increaseQuantity,
+//     decreaseQuantity,
+//     removeFromCart,
+//     clearCart,
+// } from "components/Order/cartSlice";
+// import { useNavigate } from "react-router-dom";
+// import api, { OrderItemInput } from "features/order/api";
 
 const Checkout: React.FC = () => {
     // const cartItems = useSelector((state: RootState) => state.cart.items);

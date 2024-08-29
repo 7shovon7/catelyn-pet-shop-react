@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import CButton from "../Regular/CButton";
 import { getCompleteUrl } from "utils/misc";
 import { useLocation } from "react-router-dom";
-import { Product } from "misc/types";
+import { Product } from "features/product/types";
 
 export interface ProductResponse {
     count: number;
