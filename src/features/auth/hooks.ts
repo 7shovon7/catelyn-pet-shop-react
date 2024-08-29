@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { login, logout, signup } from "./slice";
+import { fetchCurrentUser, login, logout, signup } from "features/auth/slice";
 import { AppDispatch, RootState } from "store";
-import { SignupFormData } from "./types";
+import { SignupFormData } from "features/auth/types";
 
 export const useAuth = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -21,6 +21,10 @@ export const useAuth = () => {
         dispatch(logout());
     };
 
+    const fetchCurrentUserData = () => {
+        dispatch(fetchCurrentUser());
+    };
+
     return {
         user,
         isAuthenticated,
@@ -29,5 +33,6 @@ export const useAuth = () => {
         signupUser,
         loginUser,
         logoutUser,
+        fetchCurrentUserData,
     };
 };

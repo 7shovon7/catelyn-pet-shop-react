@@ -14,7 +14,7 @@ const MAX_RETRIES = 3;
 
 // Thunk to fetch categories
 export const getCategories = createAsyncThunk(
-    "product/getCategories",
+    "category/getCategories",
     async (_, thunkAPI) => {
         let retries = 0;
         while (retries < MAX_RETRIES) {
