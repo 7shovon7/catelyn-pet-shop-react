@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
     Box,
     Button,
@@ -8,36 +7,34 @@ import {
     Input,
     Alert,
 } from "@chakra-ui/react";
-import { signup } from "features/auth/authSlice";
-import { RootState, AppDispatch } from "store";
 import { useNavigate } from "react-router-dom";
+import { SignupFormData } from "features/auth/types";
+import { useAuth } from "features/auth/hooks";
 
 const Signup: React.FC = () => {
-    const dispatch = useDispatch<AppDispatch>();
+    const { signupUser, isAuthenticated, error, loading } = useAuth();
+
     const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [fullName, setFullName] = useState("");
-    const { loading, error, user } = useSelector(
-        (state: RootState) => state.auth
-    );
 
     useEffect(() => {
-        if (user) {
+        if (isAuthenticated) {
             navigate("/");
         }
-    }, [user, navigate]);
+    }, [isAuthenticated, navigate]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        dispatch(
-            signup({
-                email,
-                full_name: fullName,
-                user_role: "CUSTOMER",
-                password,
-            })
-        );
+        const signupData: SignupFormData = {
+            email,
+            password,
+            full_name: fullName,
+            user_role: "CUSTOMER",
+        };
+        signupUser(signupData);
     };
 
     return (

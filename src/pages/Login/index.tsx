@@ -8,7 +8,7 @@ import {
     Input,
     Alert,
 } from "@chakra-ui/react";
-import { login } from "features/auth/authSlice";
+import { login } from "features/auth/slice";
 import { RootState, AppDispatch } from "store";
 import { useNavigate } from "react-router-dom";
 

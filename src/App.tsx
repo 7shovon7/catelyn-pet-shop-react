@@ -1,170 +1,56 @@
-// src/App.tsx
-import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Logo from "components/Header/Logo";
-import NavMenu from "components/Header/NavMenu";
-import Cart from "components/Header/Cart";
 import Home from "pages/Home";
 import Blogs from "pages/Blogs";
 import Products from "pages/Products";
-import Footer from "components/Footer";
 import SingleBlogDetails from "pages/Blogs/SingleBlogDetails";
-import { THEME_COLORS } from "misc/constants";
 import SingleProductDetails from "pages/Products/SingleProductDetails";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchCategories } from "components/Category/categorySlice";
-import { AppDispatch } from "store";
+import { AppDispatch, RootState } from "store";
 import Checkout from "pages/Checkout";
 import Login from "pages/Login";
 import Signup from "pages/Signup";
-import axios from "axios";
-import { getCompleteUrl } from "utils/misc";
-import { setUser } from "features/auth/authSlice";
 import OrderHistory from "pages/OrderHistory";
 import OrderDetails from "pages/OrderDetails";
 import ThankYouPage from "pages/ThankYouPage";
+import authService from "features/auth/service";
+import MainLayout from "components/Layout/MainLayout";
+import { fetchCurrentUser } from "features/auth/slice";
 
 const App: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
     useEffect(() => {
-        dispatch(fetchCategories());
-
-        const loadUser = async () => {
-            const accessToken = localStorage.getItem("accessToken");
-            console.log(accessToken);
-            if (accessToken) {
-                console.log("Access token found!");
-                try {
-                    const response = await axios.get(
-                        getCompleteUrl("/auth/users/me/"),
-                        {
-                            headers: { Authorization: `JWT ${accessToken}` },
-                        }
-                    );
-                    dispatch(setUser(response.data));
-                } catch (error) {
-                    console.error("Failed to load user", error);
-                }
-            }
-        };
-
-        loadUser();
-    }, [dispatch]);
+        const accessToken = authService.getAccessToken();
+        if (accessToken && !isAuthenticated) {
+            dispatch(fetchCurrentUser());
+        }
+    }, [dispatch, isAuthenticated]);
 
     return (
         <Router>
-            <Box display="flex" flexDirection="column" minHeight="100vh">
-                <Grid
-                    templateAreas={{
-                        base: `"header header" "main main" "footer footer"`,
-                        lg: `"header header header" "main main main" "footer footer footer"`,
-                    }}
-                    templateColumns={{ base: "1fr 1fr", lg: "1fr 1fr 1fr" }}
-                    templateRows={{ base: "auto auto", lg: "auto auto" }}
-                    flex="1"
-                >
-                    <Box
-                        gridArea="header"
-                        bgSize="cover"
-                        bgPosition="center"
-                        backgroundColor={THEME_COLORS.primary}
-                        backgroundBlendMode="overlay"
-                        display="flex"
-                        flexDirection="row"
-                        w="100%"
-                        h={81}
-                    >
-                        <Grid
-                            templateAreas={{
-                                base: `"logo nav"`,
-                                lg: `"logo nav account"`,
-                            }}
-                            templateColumns={{
-                                base: "250px 1fr",
-                                md: "350px 1fr",
-                                lg: "450px 1fr 1fr",
-                            }}
-                            alignItems="center"
-                            paddingX={{
-                                base: "12px",
-                                sm: "20px",
-                                md: "28px",
-                                lg: "36px",
-                                xl: "40",
-                                "2xl": "60",
-                            }}
-                            w="100%"
-                        >
-                            <GridItem area="logo">
-                                <Logo />
-                            </GridItem>
-                            <GridItem
-                                area="nav"
-                                display="flex"
-                                justifyContent={{
-                                    base: "flex-end",
-                                    xl: "center",
-                                }}
-                            >
-                                <NavMenu />
-                            </GridItem>
-                            <Show above="lg">
-                                <GridItem
-                                    area="account"
-                                    display="flex"
-                                    justifyContent="flex-end"
-                                >
-                                    <Cart />
-                                </GridItem>
-                            </Show>
-                        </Grid>
-                    </Box>
-
-                    <GridItem
-                        area="main"
-                        paddingX={{
-                            base: "12px",
-                            sm: "20px",
-                            md: "28px",
-                            lg: "36px",
-                            xl: "40",
-                            "2xl": "60",
-                        }}
-                        flex="1"
-                    >
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/products" element={<Products />} />
-                            <Route
-                                path="/products/:id"
-                                element={<SingleProductDetails />}
-                            />
-                            <Route path="/checkout" element={<Checkout />} />
-                            <Route path="/blogs" element={<Blogs />} />
-                            <Route
-                                path="/blogs/:slug"
-                                element={<SingleBlogDetails />}
-                            />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/signup" element={<Signup />} />
-                            <Route path="/orders" element={<OrderHistory />} />
-                            <Route
-                                path="/orders/:id"
-                                element={<OrderDetails />}
-                            />
-                            <Route
-                                path="/thank-you"
-                                element={<ThankYouPage />}
-                            />
-                        </Routes>
-                    </GridItem>
-                </Grid>
-                <Box mt="auto">
-                    <Footer />
-                </Box>
-            </Box>
+            <MainLayout>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route
+                        path="/products/:id"
+                        element={<SingleProductDetails />}
+                    />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/blogs" element={<Blogs />} />
+                    <Route
+                        path="/blogs/:slug"
+                        element={<SingleBlogDetails />}
+                    />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/orders" element={<OrderHistory />} />
+                    <Route path="/orders/:id" element={<OrderDetails />} />
+                    <Route path="/thank-you" element={<ThankYouPage />} />
+                </Routes>
+            </MainLayout>
         </Router>
     );
 };

@@ -1,16 +1,12 @@
-// src/pages/Categories/CategoryCards.tsx
 import { Text, SimpleGrid, VStack } from "@chakra-ui/react";
+import { useCategories } from "features/product/hooks/useCategories";
 import CategoryCard from "./CategoryCard";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
 
 const CategoryCards: React.FC = () => {
-    const { categories, status } = useSelector(
-        (state: RootState) => state.category
-    );
+    const { categories, loading } = useCategories();
 
-    if (status === "loading") {
+    if (loading) {
         return <Text>Loading...</Text>;
     }
 
