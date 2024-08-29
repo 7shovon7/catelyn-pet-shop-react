@@ -53,29 +53,15 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     <Badge
                         key={category.id}
                         color={THEME_COLORS.secondary}
-                        padding={2}
-                        borderRadius="md"
+                        padding={1}
+                        borderRadius="sm"
                         display="inline-block"
-                        fontSize="sm"
+                        fontSize="xx-small"
                         mb={1}
                     >
                         {category.title.toUpperCase()}
                     </Badge>
                 ))}
-                {/* <Badge
-                        color={THEME_COLORS.secondary}
-                        // variant="solid"
-                        verticalAlign="middle"
-                        padding={2}
-                        borderRadius="md"
-                        display="inline-block"
-                        fontSize="md"
-                        mb={1}
-                    > */}
-                {/* <Text fontWeight="bold" fontSize="sm">
-                    {product.category && product.category.toUpperCase()}
-                </Text> */}
-                {/* </Badge> */}
             </Box>
             <Box position="absolute" top={0} right={-4} textAlign="right">
                 <Badge
