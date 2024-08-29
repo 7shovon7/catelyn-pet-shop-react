@@ -25,6 +25,8 @@ export interface Product {
 
 export interface CategoryState {
     categories: Category[];
-    status: "idle" | "loading" | "succeeded" | "failed";
+    initiated: boolean;
+    loading: boolean;
+    // status: "idle" | "loading" | "succeeded" | "failed";
     error: string | null;
 }

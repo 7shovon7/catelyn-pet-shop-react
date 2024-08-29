@@ -1,25 +1,35 @@
 // src/features/category/categorySlice.ts
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
-import { getCompleteUrl } from "utils/misc";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Category, CategoryState } from "features/product/types";
-
-// Thunk to fetch categories
-export const fetchCategories = createAsyncThunk(
-    "category/fetchCategories",
-    async () => {
-        const response = await axios.get(
-            getCompleteUrl("/shop_settings/categories/")
-        );
-        return response.data as Category[];
-    }
-);
+import { productService } from "features/product/service";
 
 const initialState: CategoryState = {
     categories: [],
-    status: "idle",
+    initiated: false,
+    loading: false,
     error: null,
 };
+
+const MAX_RETRIES = 3;
+
+// Thunk to fetch categories
+export const getCategories = createAsyncThunk(
+    "product/getCategories",
+    async (_, thunkAPI) => {
+        let retries = 0;
+        while (retries < MAX_RETRIES) {
+            try {
+                const categories = await productService.getCategories();
+                return categories;
+            } catch (error: any) {
+                retries += 1;
+                if (retries >= MAX_RETRIES) {
+                    return thunkAPI.rejectWithValue(error.message);
+                }
+            }
+        }
+    }
+);
 
 const categorySlice = createSlice({
     name: "category",
@@ -27,20 +37,17 @@ const categorySlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchCategories.pending, (state) => {
-                state.status = "loading";
+            .addCase(getCategories.pending, (state) => {
+                state.loading = true;
+                state.initiated = true;
             })
-            .addCase(
-                fetchCategories.fulfilled,
-                (state, action: PayloadAction<Category[]>) => {
-                    state.status = "succeeded";
-                    state.categories = action.payload;
-                }
-            )
-            .addCase(fetchCategories.rejected, (state, action) => {
-                state.status = "failed";
-                state.error =
-                    action.error.message ?? "Failed to load categories";
+            .addCase(getCategories.fulfilled, (state, action) => {
+                state.loading = false;
+                state.categories = action.payload as Category[];
+            })
+            .addCase(getCategories.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
             });
     },
 });

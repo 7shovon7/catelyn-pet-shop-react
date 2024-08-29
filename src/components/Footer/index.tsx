@@ -12,17 +12,12 @@ import { COMPANY_DATA, THEME_COLORS } from "misc/constants";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { MdAlternateEmail, MdLocationOn, MdPhone } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "store";
-import { logout } from "features/auth/slice";
+import { useCategories } from "features/product/hooks/useCategories";
+import { useAuth } from "features/auth/hooks";
 
 const Footer = () => {
-    // const { categories, status, error } = useSelector(
-    //     (state: RootState) => state.category
-    // );
-
-    const { user } = useSelector((state: RootState) => state.auth);
-    const dispatch = useDispatch<AppDispatch>();
+    const { categories, loading, error } = useCategories();
+    const { isAuthenticated, logoutUser } = useAuth();
     const navigate = useNavigate();
 
     const goToPageTop = () => {
@@ -30,7 +25,7 @@ const Footer = () => {
     };
 
     const handleLogout = () => {
-        dispatch(logout());
+        logoutUser();
         navigate("/");
         goToPageTop();
     };
@@ -62,10 +57,6 @@ const Footer = () => {
         },
     ];
 
-    const isLoggedIn = () => {
-        return !!user;
-    };
-
     return (
         <Box
             bg={THEME_COLORS.primary}
@@ -83,7 +74,7 @@ const Footer = () => {
                     <Text color={THEME_COLORS.secondary} fontWeight="bold">
                         Categories
                     </Text>
-                    {/* {status === "loading" ? (
+                    {loading ? (
                         <Text color="white">Loading...</Text>
                     ) : error ? (
                         <Text color="red.500">{error}</Text>
@@ -96,13 +87,13 @@ const Footer = () => {
                                 <Text color="white">{category.title}</Text>
                             </RouterLink>
                         ))
-                    )} */}
+                    )}
                 </VStack>
                 <VStack>
                     <Text color={THEME_COLORS.secondary} fontWeight="bold">
                         Account
                     </Text>
-                    {!isLoggedIn() ? (
+                    {!isAuthenticated ? (
                         <>
                             <RouterLink to="/login" onClick={goToPageTop}>
                                 <Text color="white">Login</Text>
