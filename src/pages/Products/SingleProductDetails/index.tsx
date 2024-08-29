@@ -6,10 +6,10 @@ import { Box, Text, Image, Flex } from "@chakra-ui/react";
 import PageHeroSection from "components/Regular/PageHeroSection";
 import { getCompleteUrl } from "utils/misc";
 import CButton from "components/Regular/CButton";
-import { Product } from "misc/types";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChakraMarkdownRenderers from "utils/markdownRenderers";
+import { Product } from "features/product/types";
 
 const SingleProductDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
