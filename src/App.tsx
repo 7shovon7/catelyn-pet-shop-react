@@ -4,9 +4,7 @@ import Blogs from "pages/Blogs";
 import Products from "pages/Products";
 import SingleBlogDetails from "pages/Blogs/SingleBlogDetails";
 import SingleProductDetails from "pages/Products/SingleProductDetails";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { AppDispatch, RootState } from "store";
 import Checkout from "pages/Checkout";
 import Login from "pages/Login";
 import Signup from "pages/Signup";
@@ -15,18 +13,24 @@ import OrderDetails from "pages/OrderDetails";
 import ThankYouPage from "pages/ThankYouPage";
 import authService from "features/auth/service";
 import MainLayout from "components/Layout/MainLayout";
-import { fetchCurrentUser } from "features/auth/slice";
+import { useAuth } from "features/auth/hooks";
+import { useCategories } from "features/product/hooks/useCategories";
 
 const App: React.FC = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+    const { isAuthenticated, fetchCurrentUserData } = useAuth();
+    const { initiated, fetchCategories } = useCategories();
 
     useEffect(() => {
+        // Fetch Current User
         const accessToken = authService.getAccessToken();
         if (accessToken && !isAuthenticated) {
-            dispatch(fetchCurrentUser());
+            fetchCurrentUserData();
         }
-    }, [dispatch, isAuthenticated]);
+        // Fetch the categories
+        if (!initiated) {
+            fetchCategories();
+        }
+    }, [fetchCurrentUserData, isAuthenticated, initiated, fetchCategories]);
 
     return (
         <Router>

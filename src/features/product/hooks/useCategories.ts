@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "store";
 import { getCategories } from "../slices/category";
-import { useEffect } from "react";
 
 export const useCategories = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -10,13 +9,9 @@ export const useCategories = () => {
         (state: RootState) => state.category
     );
 
-    // const fetchCategories = () => {
-    //     dispatch(getCategories());
-    // };
-
-    useEffect(() => {
+    const fetchCategories = () => {
         dispatch(getCategories());
-    }, [initiated, dispatch]);
+    };
 
-    return { categories, loading, error };
+    return { initiated, categories, loading, error, fetchCategories };
 };
