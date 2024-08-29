@@ -8,8 +8,8 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import { addToCart } from "components/Order/cartSlice";
+import { Product } from "features/product/types";
 import { THEME_COLORS } from "misc/constants";
-import { Product } from "misc/types";
 import { FaPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";

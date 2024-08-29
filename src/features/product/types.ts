@@ -1,4 +1,3 @@
-// src/misc/types/index.ts
 export interface Category {
     id: number;
     title: string;
@@ -22,4 +21,12 @@ export interface Product {
     image: string;
     created_at: string;
     updated_at: string;
+}
+
+export interface CategoryState {
+    categories: Category[];
+    initiated: boolean;
+    loading: boolean;
+    // status: "idle" | "loading" | "succeeded" | "failed";
+    error: string | null;
 }
