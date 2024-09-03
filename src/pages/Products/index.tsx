@@ -1,22 +1,28 @@
-import { useState } from "react";
-import ProductGrid, {
-    ProductResponseUI,
-} from "../../components/Products/ProductGrid";
+import { useEffect } from "react";
+import ProductGrid from "../../components/Products/ProductGrid";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import PageHeroSection from "components/Regular/PageHeroSection";
+import { useProducts } from "features/product/hooks/useProducts";
 
 const ProductMainBody = () => {
+    const { fetchProducts, productsByCategory, loading, totalCountByCategory } =
+        useProducts();
+    const categoryKey = "all";
     const limit = 50;
-    const [count, setCount] = useState<number | null>(null);
-    const [resultsLength, setResultsLength] = useState<number>(0);
+    const totalFetched = Object.values(
+        productsByCategory[categoryKey] || {}
+    ).flat().length;
 
-    const handdleDataFetched = ({
-        count,
-        resultsLength,
-    }: ProductResponseUI) => {
-        setCount(count);
-        setResultsLength(resultsLength);
-    };
+    useEffect(() => {
+        if (totalFetched < 50) {
+            fetchProducts({
+                limit: limit - totalFetched,
+                offset: totalFetched,
+            });
+        }
+    }, [fetchProducts, totalFetched]);
+
+    const allProducts = productsByCategory[categoryKey] || {};
 
     return (
         <>
@@ -26,13 +32,23 @@ const ProductMainBody = () => {
             />
             <Flex direction={{ base: "column", sm: "row" }}>
                 <Text fontSize="14px" paddingY="12px">
-                    {`Showing 1-${resultsLength} of ${count} results`.toUpperCase()}
+                    {`Showing 1-${totalFetched} of ${
+                        totalCountByCategory[categoryKey] || 0
+                    } results`.toUpperCase()}
                 </Text>
             </Flex>
             <ProductGrid
-                limit={limit}
-                onDataFetched={handdleDataFetched}
-                pagination={true}
+                products={Object.values(allProducts).flat()}
+                loading={loading}
+                onLoadMore={() =>
+                    fetchProducts({
+                        limit: limit - totalFetched,
+                        offset: totalFetched,
+                    })
+                }
+                hasMore={
+                    totalFetched < (totalCountByCategory[categoryKey] || 0)
+                }
             />
             <Box marginY="32px" />
         </>

@@ -23,10 +23,34 @@ export interface Product {
     updated_at: string;
 }
 
+export interface ProductResponse {
+    count: number;
+    next: null | string;
+    previous: null | string;
+    results: Product[];
+}
+
+export interface ProductParameters {
+    limit?: number;
+    offset?: number;
+    categories?: number;
+}
+
 export interface CategoryState {
     categories: Category[];
     initiated: boolean;
     loading: boolean;
     // status: "idle" | "loading" | "succeeded" | "failed";
+    error: string | null;
+}
+
+export interface ProductState {
+    productsByCategory: {
+        [categoryId: string]: Product[];
+    };
+    totalCountByCategory: {
+        [categoryId: string]: number;
+    };
+    loading: boolean;
     error: string | null;
 }
