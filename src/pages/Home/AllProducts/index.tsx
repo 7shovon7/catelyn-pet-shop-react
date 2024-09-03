@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import SectionHeader from "../SectionHeader";
-import ProductGrid from "../../../components/Products/ProductGrid";
+import SectionHeader from "pages/Home/SectionHeader";
+import ProductGrid from "components/Products/ProductGrid";
 import { useProducts } from "features/product/hooks/useProducts";
 
 const AllProducts = () => {
@@ -8,27 +8,35 @@ const AllProducts = () => {
         useProducts();
     const categoryKey = "all";
     const offset = 0;
-    const limit = 10;
+    const limit = 1;
 
     useEffect(() => {
-        fetchProducts({ limit, offset });
+        fetchProducts({ limit, offset, categories: undefined });
     }, [fetchProducts]);
 
-    const products = productsByCategory[categoryKey] || {};
+    const products = productsByCategory[categoryKey]
+        ? productsByCategory[categoryKey].length >=
+          totalCountByCategory[categoryKey]
+            ? productsByCategory[categoryKey].slice(offset, limit)
+            : productsByCategory[categoryKey].slice(
+                  offset,
+                  totalCountByCategory[categoryKey]
+              )
+        : [];
 
     return (
         <>
             <SectionHeader title="Furries Best Choice" to="/products" />
             <ProductGrid
-                products={productsByCategory[categoryKey]}
+                products={products}
                 loading={loading}
                 onLoadMore={() =>
                     fetchProducts({
                         limit,
-                        offset: products.length,
+                        offset: offset,
                     })
                 }
-                hasMore={products.length < totalCountByCategory[categoryKey]}
+                hasMore={false}
             />
         </>
     );
