@@ -14,15 +14,12 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { MdEmail, MdLocationOn, MdPhone, MdWhatsapp } from "react-icons/md";
 import { useCategories } from "features/product/hooks/useCategories";
 import { useAuth } from "features/auth/hooks";
+import { goToPageTop } from "utils/misc";
 
 const Footer = () => {
     const { categories, loading, error } = useCategories();
     const { isAuthenticated, logoutUser } = useAuth();
     const navigate = useNavigate();
-
-    const goToPageTop = () => {
-        window.scrollTo(0, 0);
-    };
 
     const handleLogout = () => {
         logoutUser();

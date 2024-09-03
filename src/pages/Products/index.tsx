@@ -4,6 +4,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import PageHeroSection from "components/Regular/PageHeroSection";
 import { useProducts } from "features/product/hooks/useProducts";
 import { useSearchParams } from "react-router-dom";
+import { goToPageTop } from "utils/misc";
 
 const ProductMainBody = () => {
     const { fetchProducts, productsByCategory, loading, totalCountByCategory } =
@@ -15,6 +16,7 @@ const ProductMainBody = () => {
     const offset = 0;
 
     useEffect(() => {
+        goToPageTop();
         fetchProducts({
             limit: limit,
             offset: offset,
