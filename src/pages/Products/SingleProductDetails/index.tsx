@@ -50,14 +50,22 @@ const SingleProductDetails: React.FC = () => {
                         {new Date(product.created_at).toLocaleDateString()}
                     </Text>
                     {product.image && (
-                        <Image src={product.image} alt={product.title} />
+                        <Flex justify="center">
+                            <Image
+                                src={product.image}
+                                alt={product.title}
+                                filter={isStockOut ? "grayscale(100%)" : "none"}
+                            />
+                        </Flex>
                     )}
                     <Text fontSize="2xl" fontWeight="bold" mb={2}>
                         {product.title}
                     </Text>
-                    <Text fontSize="lg" color="gray.700" mb={4}>
-                        ৳{product.price.toFixed(2)}
-                    </Text>
+                    {!isStockOut && (
+                        <Text fontSize="lg" color="gray.700" mb={4}>
+                            ৳{product.price.toFixed(2)}
+                        </Text>
+                    )}
                     <Box mb={8}>
                         <ReactMarkdown
                             remarkPlugins={[remarkGfm]}

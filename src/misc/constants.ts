@@ -1,6 +1,8 @@
 // src/misc/constants.ts
 
 export const COMPANY_DATA = {
+    name: "Catelyn Pet Shop",
+    shortName: "CPS",
     phoneDisplay: "01800-072-072",
     phoneClean: "01800-072-072",
     email: "catelynpetshop@gmail.com",
@@ -21,6 +23,10 @@ export const COMPANY_DATA = {
         },
     ],
     social: {
+        whatsApp: {
+            title: "01800-072-072",
+            url: "https://wa.me/+8801800072072",
+        },
         fb: {
             url: "https://www.facebook.com/profile.php?id=100071532367874",
         },
