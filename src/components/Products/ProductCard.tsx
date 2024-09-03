@@ -77,6 +77,13 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     </Badge>
                 ))}
             </Box>
+            {isStockOut && (
+                <Box position="absolute" top={0} right={-4} textAlign={"right"}>
+                    <Badge color={THEME_COLORS.danger}>
+                        <Text>Stock Out</Text>
+                    </Badge>
+                </Box>
+            )}
             {!isStockOut && (
                 <Box position="absolute" top={0} right={-4} textAlign="right">
                     <Badge
