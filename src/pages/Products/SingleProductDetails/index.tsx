@@ -32,6 +32,8 @@ const SingleProductDetails: React.FC = () => {
 
     if (!product) return <Text>Loading...</Text>;
 
+    const isStockOut = product.custom_stock_out_signal === true;
+
     return (
         <>
             <PageHeroSection
@@ -64,7 +66,7 @@ const SingleProductDetails: React.FC = () => {
                             {product.description}
                         </ReactMarkdown>
                     </Box>
-                    <CButton>Add to Cart</CButton>
+                    {!isStockOut && <CButton>Add to Cart</CButton>}
                 </Box>
             </Flex>
         </>
