@@ -61,11 +61,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 
     return (
         <Card minHeight="300px" position="relative">
-            {isStockOut ? (
-                productBodyInCard
-            ) : (
-                <Link to={`/products/${product.id}`}>{productBodyInCard}</Link>
-            )}
+            <Link to={`/products/${product.id}`}>{productBodyInCard}</Link>
             <Box position="absolute" top={2} left={2} textAlign="right">
                 {product.categories.map((category) => (
                     <Badge
