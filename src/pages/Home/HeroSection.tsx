@@ -23,8 +23,7 @@ const HeroSection = () => {
                     </Text>
                     <Text fontSize="lg" fontWeight="bold">
                         {/* 1% of your purchase goes to feeding stray animals */}
-                        5% of you purchases will go to feed flood affected
-                        animals
+                        1% of your purchases will go to feed stray animals
                     </Text>
                     <Text fontSize="sm">
                         So what are you waiting for? Get quality products for

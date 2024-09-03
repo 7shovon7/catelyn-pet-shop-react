@@ -29,10 +29,10 @@ const OfferBanner = () => {
                         fontWeight="bold"
                         textAlign="center"
                     >
-                        Get 10% OFF on your order for helping
+                        This website is under development
                     </Text>
                     <Text color="white" fontSize="lg" textAlign="center">
-                        flood affected people!
+                        Please confirm anything here through Call/WhatsApp
                     </Text>
                 </VStack>
                 <CButton
