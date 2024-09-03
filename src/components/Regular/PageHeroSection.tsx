@@ -21,10 +21,15 @@ const PageHeroSection = ({ pageTitle, breadcrumbs }: Props) => {
             justifyContent="center"
             paddingY="32px"
         >
-            <Heading fontSize="6xl" fontWeight="bold" textAlign="center" mb={8}>
+            <Heading
+                fontSize={{ base: "2xl", md: "4xl", lg: "6xl" }}
+                fontWeight="bold"
+                textAlign="center"
+                mb={8}
+            >
                 {pageTitle}
             </Heading>
-            <HStack>
+            <HStack fontSize={{ base: "sm", lg: "lg" }}>
                 {breadcrumbs.map((breadcrumb, index) => (
                     <React.Fragment key={index}>
                         <Link

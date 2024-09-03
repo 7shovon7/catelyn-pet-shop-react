@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Text, Image, Flex } from "@chakra-ui/react";
 import PageHeroSection from "components/Regular/PageHeroSection";
-import { getCompleteUrl } from "utils/misc";
+import { getCompleteUrl, goToPageTop } from "utils/misc";
 import CButton from "components/Regular/CButton";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -16,6 +16,7 @@ const SingleProductDetails: React.FC = () => {
     const [product, setProduct] = useState<Product | null>(null);
 
     useEffect(() => {
+        goToPageTop();
         const fetchProduct = async () => {
             try {
                 const response = await axios.get(
@@ -35,7 +36,7 @@ const SingleProductDetails: React.FC = () => {
     const isStockOut = product.custom_stock_out_signal === true;
 
     return (
-        <>
+        <Box marginX={4}>
             <PageHeroSection
                 pageTitle={product.title}
                 breadcrumbs={[
@@ -58,7 +59,11 @@ const SingleProductDetails: React.FC = () => {
                             />
                         </Flex>
                     )}
-                    <Text fontSize="2xl" fontWeight="bold" mb={2}>
+                    <Text
+                        fontSize={{ base: "xl", md: "2xl" }}
+                        fontWeight="bold"
+                        mb={2}
+                    >
                         {product.title}
                     </Text>
                     {!isStockOut && (
@@ -77,7 +82,7 @@ const SingleProductDetails: React.FC = () => {
                     {!isStockOut && <CButton>Add to Cart</CButton>}
                 </Box>
             </Flex>
-        </>
+        </Box>
     );
 };
 
