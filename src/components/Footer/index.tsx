@@ -172,7 +172,10 @@ const Footer = () => {
             </HStack>
             <Divider marginY={4} />
             <Text textAlign="center" fontSize={16} color="white">
-                © {new Date().getFullYear()} Catelyn Pet Shop
+                Developed by{" "}
+                <Text as="span" color={THEME_COLORS.secondary}>
+                    {COMPANY_DATA.name} Team
+                </Text>
             </Text>
         </Box>
     );

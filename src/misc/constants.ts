@@ -1,6 +1,8 @@
 // src/misc/constants.ts
 
 export const COMPANY_DATA = {
+    name: "Catelyn Pet Shop",
+    shortName: "CPS",
     phoneDisplay: "01800-072-072",
     phoneClean: "01800-072-072",
     email: "catelynpetshop@gmail.com",

@@ -19,7 +19,7 @@ const HeroSection = () => {
             <GridItem area="left" marginTop={{ base: "20px", lg: "120px" }}>
                 <VStack spacing={4} align="flex-start">
                     <Text fontSize="6xl" fontWeight="bold">
-                        Our shop is what your pet wants!
+                        Our shop is what your cat wants!
                     </Text>
                     <Text fontSize="lg" fontWeight="bold">
                         {/* 1% of your purchase goes to feeding stray animals */}
