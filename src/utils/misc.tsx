@@ -32,6 +32,10 @@ export const extractFirstImageUrl = (content: string): string | null => {
     return null;
 };
 
+export const goToPageTop = () => {
+    window.scrollTo(0, 0);
+};
+
 // export const generateProductKey = (
 //     limit: number,
 //     offset: number,

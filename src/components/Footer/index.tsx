@@ -11,18 +11,15 @@ import {
 import { COMPANY_DATA, THEME_COLORS } from "misc/constants";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { MdAlternateEmail, MdLocationOn, MdPhone } from "react-icons/md";
+import { MdEmail, MdLocationOn, MdPhone, MdWhatsapp } from "react-icons/md";
 import { useCategories } from "features/product/hooks/useCategories";
 import { useAuth } from "features/auth/hooks";
+import { goToPageTop } from "utils/misc";
 
 const Footer = () => {
     const { categories, loading, error } = useCategories();
     const { isAuthenticated, logoutUser } = useAuth();
     const navigate = useNavigate();
-
-    const goToPageTop = () => {
-        window.scrollTo(0, 0);
-    };
 
     const handleLogout = () => {
         logoutUser();
@@ -37,16 +34,26 @@ const Footer = () => {
             link: `tel:${COMPANY_DATA.phoneClean}`,
             icon: MdPhone,
         },
+        // {
+        //     type: "email",
+        //     value: COMPANY_DATA.email,
+        //     link: `mailto:${COMPANY_DATA.email}`,
+        //     icon: MdAlternateEmail,
+        // },
         {
-            type: "email",
-            value: COMPANY_DATA.email,
-            link: `mailto:${COMPANY_DATA.email}`,
-            icon: MdAlternateEmail,
+            type: "whatsapp",
+            value: COMPANY_DATA.social.whatsApp.title,
+            link: COMPANY_DATA.social.whatsApp.url,
+            icon: MdWhatsapp,
         },
     ];
 
     const socialIcons = [
-        { icon: MdAlternateEmail, link: `mailto:${COMPANY_DATA.email}` },
+        { icon: MdEmail, link: `mailto:${COMPANY_DATA.email}` },
+        {
+            icon: MdWhatsapp,
+            link: COMPANY_DATA.social.whatsApp.url,
+        },
         {
             icon: FaFacebook,
             link: COMPANY_DATA.social.fb.url,
@@ -165,7 +172,10 @@ const Footer = () => {
             </HStack>
             <Divider marginY={4} />
             <Text textAlign="center" fontSize={16} color="white">
-                Copyright © {new Date().getFullYear()} Catelyn Pet Shop
+                Developed by{" "}
+                <Text as="span" color={THEME_COLORS.secondary}>
+                    {COMPANY_DATA.name} Team
+                </Text>
             </Text>
         </Box>
     );
