@@ -3,11 +3,14 @@ import ProductGrid from "../../components/Products/ProductGrid";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import PageHeroSection from "components/Regular/PageHeroSection";
 import { useProducts } from "features/product/hooks/useProducts";
+import { useSearchParams } from "react-router-dom";
 
 const ProductMainBody = () => {
     const { fetchProducts, productsByCategory, loading, totalCountByCategory } =
         useProducts();
-    const categoryKey = "all";
+    const [searchParams] = useSearchParams();
+    const categoryParam = searchParams.get("categories");
+    const categoryKey = categoryParam || "all";
     const limit = 50;
     const totalFetched = Object.values(
         productsByCategory[categoryKey] || {}
@@ -18,9 +21,10 @@ const ProductMainBody = () => {
             fetchProducts({
                 limit: limit - totalFetched,
                 offset: totalFetched,
+                categories: categoryParam ? parseInt(categoryParam) : undefined,
             });
         }
-    }, [fetchProducts, totalFetched]);
+    }, [fetchProducts, categoryParam, totalFetched]);
 
     const allProducts = productsByCategory[categoryKey] || {};
 
