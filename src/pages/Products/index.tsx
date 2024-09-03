@@ -11,22 +11,18 @@ const ProductMainBody = () => {
     const [searchParams] = useSearchParams();
     const categoryParam = searchParams.get("categories");
     const categoryKey = categoryParam || "all";
-    const limit = 50;
-    const totalFetched = Object.values(
-        productsByCategory[categoryKey] || {}
-    ).flat().length;
+    const limit = 1;
+    const offset = 0;
 
     useEffect(() => {
-        if (totalFetched < 50) {
-            fetchProducts({
-                limit: limit - totalFetched,
-                offset: totalFetched,
-                categories: categoryParam ? parseInt(categoryParam) : undefined,
-            });
-        }
-    }, [fetchProducts, categoryParam, totalFetched]);
+        fetchProducts({
+            limit: limit,
+            offset: offset,
+            categories: categoryParam ? parseInt(categoryParam) : undefined,
+        });
+    }, [fetchProducts, categoryParam]);
 
-    const allProducts = productsByCategory[categoryKey] || {};
+    const products = productsByCategory[categoryKey] || [];
 
     return (
         <>
@@ -36,23 +32,21 @@ const ProductMainBody = () => {
             />
             <Flex direction={{ base: "column", sm: "row" }}>
                 <Text fontSize="14px" paddingY="12px">
-                    {`Showing 1-${totalFetched} of ${
+                    {`Showing 1-${products.length} of ${
                         totalCountByCategory[categoryKey] || 0
                     } results`.toUpperCase()}
                 </Text>
             </Flex>
             <ProductGrid
-                products={Object.values(allProducts).flat()}
+                products={products}
                 loading={loading}
                 onLoadMore={() =>
                     fetchProducts({
-                        limit: limit - totalFetched,
-                        offset: totalFetched,
+                        limit: limit,
+                        offset: products.length,
                     })
                 }
-                hasMore={
-                    totalFetched < (totalCountByCategory[categoryKey] || 0)
-                }
+                hasMore={products.length < totalCountByCategory[categoryKey]}
             />
             <Box marginY="32px" />
         </>
