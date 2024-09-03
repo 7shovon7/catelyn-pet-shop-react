@@ -11,7 +11,7 @@ const ProductMainBody = () => {
     const [searchParams] = useSearchParams();
     const categoryParam = searchParams.get("categories");
     const categoryKey = categoryParam || "all";
-    const limit = 1;
+    const limit = 50;
     const offset = 0;
 
     useEffect(() => {
