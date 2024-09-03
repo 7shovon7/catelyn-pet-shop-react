@@ -21,6 +21,10 @@ export const COMPANY_DATA = {
         },
     ],
     social: {
+        whatsApp: {
+            title: "01800-072-072",
+            url: "https://wa.me/+8801800072072",
+        },
         fb: {
             url: "https://www.facebook.com/profile.php?id=100071532367874",
         },
