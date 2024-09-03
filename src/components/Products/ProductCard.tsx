@@ -60,13 +60,18 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     );
 
     return (
-        <Card minHeight="300px" position="relative">
+        <Card
+            minHeight="300px"
+            position="relative"
+            marginX={{ base: 4, sm: 0 }}
+        >
             <Link to={`/products/${product.id}`}>{productBodyInCard}</Link>
             <Box position="absolute" top={2} left={2} textAlign="right">
                 {product.categories.map((category) => (
                     <Badge
                         key={category.id}
                         color={THEME_COLORS.secondary}
+                        colorScheme="white"
                         padding={1}
                         borderRadius="sm"
                         display="inline-block"
@@ -85,7 +90,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 </Box>
             )}
             {!isStockOut && (
-                <Box position="absolute" top={0} right={-4} textAlign="right">
+                <Box position="absolute" top={-4} right={-4} textAlign="right">
                     <Badge
                         color={THEME_COLORS.secondary}
                         verticalAlign="middle"
