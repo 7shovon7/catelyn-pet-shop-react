@@ -1,35 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ProductParameters, ProductState } from "../types";
 import { productService } from "../service";
-import { generateProductKey } from "utils/misc";
 import { RootState } from "store";
 
 const initialState: ProductState = {
-    products: {},
-    totalCount: {},
+    productsByCategory: {},
+    totalCountByCategory: {},
     loading: false,
     error: null,
 };
 
 export const getProducts = createAsyncThunk(
     "products/fetchProducts",
-    // async (productParams: ProductParameters = {}, thunkAPI) => {
-    //     try {
-    //         const productResp = await productService.getProducts(productParams);
-    //         return productResp;
-    //     } catch (error: any) {
-    //         return thunkAPI.rejectWithValue(error.message);
-    //     }
-    // }
     async (params: ProductParameters, { getState, rejectWithValue }) => {
-        const { limit, offset, categories } = params;
-        const key = generateProductKey(limit!, offset!, categories);
+        const { limit = 10, offset = 0, categories = "all" } = params;
+        const categoryKey = categories;
 
         const state = getState() as RootState;
-        const cachedProducts = state.product.products[key];
+        const existingProducts =
+            state.product.productsByCategory[categoryKey] || [];
 
-        if (cachedProducts) {
-            return { products: cachedProducts, key };
+        if (existingProducts.length >= limit + offset) {
+            // Already enough data in state
+            return;
         }
 
         try {
@@ -37,7 +30,7 @@ export const getProducts = createAsyncThunk(
             return {
                 products: productResp.results,
                 count: productResp.count,
-                key,
+                categoryKey,
             };
         } catch (error: any) {
             return rejectWithValue(error.message);
@@ -55,12 +48,23 @@ const productSlice = createSlice({
                 state.loading = true;
             })
             .addCase(getProducts.fulfilled, (state, action) => {
-                const { products, count, key } = action.payload;
-                state.products[key] = [
-                    ...(state.products[key] || []),
-                    ...products,
-                ];
-                state.totalCount[key] = count as number;
+                if (action.payload) {
+                    const { products, count, categoryKey } = action.payload;
+                    if (!state.productsByCategory[categoryKey]) {
+                        state.productsByCategory[categoryKey] = [];
+                    }
+                    const existingProductsSet = new Set(
+                        state.productsByCategory[categoryKey].map((p) => p.id)
+                    );
+                    const newProducts = products.filter(
+                        (product) => !existingProductsSet.has(product.id)
+                    );
+                    state.productsByCategory[categoryKey] = [
+                        ...state.productsByCategory[categoryKey],
+                        ...newProducts,
+                    ];
+                    state.totalCountByCategory[categoryKey] = count;
+                }
                 state.loading = false;
             })
             .addCase(getProducts.rejected, (state, action) => {

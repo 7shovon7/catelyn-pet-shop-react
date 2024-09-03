@@ -45,8 +45,12 @@ export interface CategoryState {
 }
 
 export interface ProductState {
-    products: { [key: string]: Product[] };
-    totalCount: { [key: string]: number };
+    productsByCategory: {
+        [categoryId: string]: Product[];
+    };
+    totalCountByCategory: {
+        [categoryId: string]: number;
+    };
     loading: boolean;
     error: string | null;
 }

@@ -32,10 +32,10 @@ export const extractFirstImageUrl = (content: string): string | null => {
     return null;
 };
 
-export const generateProductKey = (
-    limit: number,
-    offset: number,
-    categories?: number
-) => {
-    return `limit=${limit}&offset=${offset}&categories=${categories || "all"}`;
-};
+// export const generateProductKey = (
+//     limit: number,
+//     offset: number,
+//     categories?: number
+// ) => {
+//     return `limit=${limit}&offset=${offset}&categories=${categories || "all"}`;
+// };

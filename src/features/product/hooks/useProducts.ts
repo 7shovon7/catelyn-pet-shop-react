@@ -3,27 +3,36 @@ import { AppDispatch, RootState } from "store";
 import { ProductParameters } from "../types";
 import { getProducts } from "../slices/product";
 import { useCallback } from "react";
-import { generateProductKey } from "utils/misc";
 
 export const useProducts = () => {
     const dispatch: AppDispatch = useDispatch();
-    const { products, loading, totalCount } = useSelector(
+    const { productsByCategory, loading, totalCountByCategory } = useSelector(
         (state: RootState) => state.product
     );
 
     const fetchProducts = useCallback(
         (params: ProductParameters) => {
-            const { limit, offset, categories } = params;
-            const key = generateProductKey(limit!, offset!, categories);
+            const { limit = 10, offset = 0, categories } = params;
+            const categoryKey = categories?.toString() || "all";
+            const totalFetched = productsByCategory[categoryKey]?.length || 0;
+            const totalCount = totalCountByCategory[categoryKey] || 0;
 
-            if (products[key] && products[key].length >= limit!) {
-                // Already enough data in state
+            if (loading) {
                 return;
+            } else if (
+                (totalFetched > 0 &&
+                    totalFetched >= totalCount &&
+                    totalCount > 0) ||
+                totalFetched >= offset + limit
+            ) {
+                return;
+            } else {
+                // console.log("Fetching products from API...");
+                dispatch(getProducts(params));
             }
-            dispatch(getProducts(params));
         },
-        [dispatch, products]
+        [dispatch, productsByCategory, totalCountByCategory]
     );
 
-    return { products, loading, totalCount, fetchProducts };
+    return { productsByCategory, loading, totalCountByCategory, fetchProducts };
 };
