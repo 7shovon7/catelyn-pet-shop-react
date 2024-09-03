@@ -1,5 +1,5 @@
 import { Box, Grid, GridItem, Image, Text, VStack } from "@chakra-ui/react";
-import CButton from "../../components/Regular/CButton";
+import CButton from "components/Regular/CButton";
 import catImage from "../../assets/cat-in-banner.png";
 import { useNavigate } from "react-router-dom";
 
@@ -17,8 +17,11 @@ const HeroSection = () => {
             w="100%"
         >
             <GridItem area="left" marginTop={{ base: "20px", lg: "120px" }}>
-                <VStack spacing={4} align="flex-start">
-                    <Text fontSize="6xl" fontWeight="bold">
+                <VStack spacing={{ base: 4 }} align="flex-start">
+                    <Text
+                        fontSize={{ base: "4xl", lg: "6xl" }}
+                        fontWeight="bold"
+                    >
                         Our shop is what your cat wants!
                     </Text>
                     <Text fontSize="lg" fontWeight="bold">
