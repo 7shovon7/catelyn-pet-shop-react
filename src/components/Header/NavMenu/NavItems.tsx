@@ -5,12 +5,14 @@ import { THEME_COLORS } from "misc/constants";
 interface Props {
     text: string;
     to: string;
+    onClose: () => void;
 }
 
-const NavItems = ({ text, to }: Props) => {
+const NavItems = ({ text, to, onClose }: Props) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
+        onClose();
         navigate(to);
     };
     return (

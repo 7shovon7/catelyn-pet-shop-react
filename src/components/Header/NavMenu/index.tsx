@@ -19,10 +19,10 @@ const NavMenu = () => {
 
     const simpleNavMenu: ReactNode = (
         <>
-            <NavItems text="Home" to="/" />
-            <NavItems text="Products" to="/products" />
-            <NavItems text="Blog" to="/blogs" />
-            <NavItems text="About Us" to="/" />
+            <NavItems text="Home" to="/" onClose={onClose} />
+            <NavItems text="Products" to="/products" onClose={onClose} />
+            <NavItems text="Blog" to="/blogs" onClose={onClose} />
+            <NavItems text="About Us" to="/" onClose={onClose} />
         </>
     );
 
