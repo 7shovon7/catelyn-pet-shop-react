@@ -38,11 +38,21 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         };
         dispatch(addToCart(cartItem));
     };
+
+    const isStockOut =
+        product.custom_stock_out_signal === true ||
+        product.available_stock === 0;
+
     return (
         <Card minHeight="300px" position="relative">
             <Link to={`/products/${product.id}`}>
                 <VStack spacing={2} paddingBottom={4} paddingX={4}>
-                    <Image src={product.image} fit="contain" height="250px" />
+                    <Image
+                        src={product.image}
+                        fit="contain"
+                        height="250px"
+                        filter={isStockOut ? "grayscale(100%)" : "none"}
+                    />
                     <Text fontSize={16} fontWeight="bold" textAlign="center">
                         {product.title}
                     </Text>
@@ -63,29 +73,31 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     </Badge>
                 ))}
             </Box>
-            <Box position="absolute" top={0} right={-4} textAlign="right">
-                <Badge
-                    color={THEME_COLORS.secondary}
-                    verticalAlign="middle"
-                    padding={2}
-                    borderRadius="md"
-                    display="inline-block"
-                    fontSize="md"
-                    mb={1}
-                >
-                    <VStack>
-                        <Text>৳{product.price}</Text>
-                        <IconButton
-                            aria-label="Add to cart"
-                            icon={<FaPlus />}
-                            color={THEME_COLORS.secondary}
-                            variant="solid"
-                            size="sm"
-                            onClick={handleAddToCart}
-                        />
-                    </VStack>
-                </Badge>
-            </Box>
+            {!isStockOut && (
+                <Box position="absolute" top={0} right={-4} textAlign="right">
+                    <Badge
+                        color={THEME_COLORS.secondary}
+                        verticalAlign="middle"
+                        padding={2}
+                        borderRadius="md"
+                        display="inline-block"
+                        fontSize="md"
+                        mb={1}
+                    >
+                        <VStack>
+                            <Text>৳{product.price}</Text>
+                            <IconButton
+                                aria-label="Add to cart"
+                                icon={<FaPlus />}
+                                color={THEME_COLORS.secondary}
+                                variant="solid"
+                                size="sm"
+                                onClick={handleAddToCart}
+                            />
+                        </VStack>
+                    </Badge>
+                </Box>
+            )}
         </Card>
     );
 };
