@@ -15,8 +15,7 @@ const AllProducts = () => {
     }, [fetchProducts]);
 
     const products = productsByCategory[categoryKey]
-        ? productsByCategory[categoryKey].length >=
-          totalCountByCategory[categoryKey]
+        ? productsByCategory[categoryKey].length >= limit
             ? productsByCategory[categoryKey].slice(offset, limit)
             : productsByCategory[categoryKey].slice(
                   offset,
