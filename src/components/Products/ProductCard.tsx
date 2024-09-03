@@ -39,9 +39,11 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         dispatch(addToCart(cartItem));
     };
 
-    const isStockOut =
-        product.custom_stock_out_signal === true ||
-        product.available_stock === 0;
+    // const isStockOut =
+    //     product.custom_stock_out_signal === true ||
+    //     product.available_stock === 0;
+
+    const isStockOut = product.custom_stock_out_signal === true;
 
     return (
         <Card minHeight="300px" position="relative">
