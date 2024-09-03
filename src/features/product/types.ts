@@ -14,6 +14,7 @@ export interface Product {
     price: number;
     discounted_price: number;
     available_stock: number;
+    custom_stock_out_signal: boolean | null;
     total_sold: number;
     size: number;
     size_unit: string;
