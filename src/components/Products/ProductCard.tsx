@@ -45,21 +45,27 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 
     const isStockOut = product.custom_stock_out_signal === true;
 
+    const productBodyInCard = (
+        <VStack spacing={2} paddingBottom={4} paddingX={4}>
+            <Image
+                src={product.image}
+                fit="contain"
+                height="250px"
+                filter={isStockOut ? "grayscale(100%)" : "none"}
+            />
+            <Text fontSize={16} fontWeight="bold" textAlign="center">
+                {product.title}
+            </Text>
+        </VStack>
+    );
+
     return (
         <Card minHeight="300px" position="relative">
-            <Link to={`/products/${product.id}`}>
-                <VStack spacing={2} paddingBottom={4} paddingX={4}>
-                    <Image
-                        src={product.image}
-                        fit="contain"
-                        height="250px"
-                        filter={isStockOut ? "grayscale(100%)" : "none"}
-                    />
-                    <Text fontSize={16} fontWeight="bold" textAlign="center">
-                        {product.title}
-                    </Text>
-                </VStack>
-            </Link>
+            {isStockOut ? (
+                productBodyInCard
+            ) : (
+                <Link to={`/products/${product.id}`}>{productBodyInCard}</Link>
+            )}
             <Box position="absolute" top={2} left={2} textAlign="right">
                 {product.categories.map((category) => (
                     <Badge
