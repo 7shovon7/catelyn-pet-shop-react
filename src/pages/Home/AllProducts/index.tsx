@@ -8,7 +8,7 @@ const AllProducts = () => {
         useProducts();
     const categoryKey = "all";
     const offset = 0;
-    const limit = 1;
+    const limit = 10;
 
     useEffect(() => {
         fetchProducts({ limit, offset, categories: undefined });
