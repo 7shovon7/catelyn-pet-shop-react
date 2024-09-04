@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BlogGrid, { BlogPostResponseUI } from "../../components/Blogs/BlogGrid";
+import BlogGrid, { BlogPostResponseUI } from "components/Blogs/BlogGrid";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import PageHeroSection from "components/Regular/PageHeroSection";
 
