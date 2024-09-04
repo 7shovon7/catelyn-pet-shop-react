@@ -14,6 +14,7 @@ import { FaPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppDispatch } from "store";
+import { truncateTitle } from "utils/misc";
 
 interface Props {
     product: Product;
@@ -54,7 +55,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 filter={isStockOut ? "grayscale(100%)" : "none"}
             />
             <Text fontSize={16} fontWeight="bold" textAlign="center">
-                {product.title}
+                {truncateTitle(product.title, 50)}
             </Text>
         </VStack>
     );

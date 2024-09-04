@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Text } from "@chakra-ui/react";
-import { BlogPost } from "components/Blogs/BlogGrid";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChakraMarkdownRenderers from "utils/markdownRenderers";
 import PageHeroSection from "components/Regular/PageHeroSection";
 import { checkAndGetCompleteUrl, getCompleteUrl } from "utils/misc";
+import { BlogPost } from "features/blog/types";
 
 const SingleBlogDetails: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();

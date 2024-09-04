@@ -43,3 +43,22 @@ export const goToPageTop = () => {
 // ) => {
 //     return `limit=${limit}&offset=${offset}&categories=${categories || "all"}`;
 // };
+
+export const truncateTitle = (str: string, maxLength: number): string => {
+    if (str.length <= maxLength) return str;
+
+    // Split the string into words
+    const words = str.split(" ");
+
+    // Build a truncated string word by word
+    let truncated = "";
+
+    for (let word of words) {
+        if (truncated.length + word.length + 1 > maxLength) {
+            break;
+        }
+        truncated += (truncated ? " " : "") + word;
+    }
+
+    return truncated + "...";
+};
