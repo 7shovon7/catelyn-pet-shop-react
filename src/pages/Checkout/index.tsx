@@ -9,7 +9,7 @@ import {
     Button,
 } from "@chakra-ui/react";
 import CButton from "components/Regular/CButton";
-import { useCart } from "components/Order/hooks";
+import { useCart } from "features/cart/hooks";
 import { useNavigate } from "react-router-dom";
 import api, { OrderItemInput } from "features/order/api";
 

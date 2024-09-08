@@ -1,4 +1,4 @@
-interface CartItem {
+export interface CartItem {
     id: number;
     title: string;
     price: number;
@@ -7,8 +7,6 @@ interface CartItem {
     categories: string | null;
 }
 
-interface CartState {
+export interface CartState {
     items: CartItem[];
 }
-
-export type { CartItem, CartState };

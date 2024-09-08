@@ -3,7 +3,7 @@ import authReducer from "features/auth/slice";
 import categoryReducer from "features/product/slices/category";
 import productReducer from "features/product/slices/product";
 import blogReducer from "features/blog/slice";
-import cartReducer from "components/Order/cartSlice";
+import cartReducer from "features/cart/cartSlice";
 
 export const store = configureStore({
     reducer: {

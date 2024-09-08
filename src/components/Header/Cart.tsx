@@ -4,7 +4,7 @@ import { Box, IconButton, Badge } from "@chakra-ui/react";
 import { THEME_COLORS } from "misc/constants";
 import { FaShoppingBasket } from "react-icons/fa";
 import { Link as RouterLink } from "react-router-dom";
-import { useCart } from "components/Order/hooks";
+import { useCart } from "features/cart/hooks";
 
 const Cart = () => {
     const { totalItems } = useCart();

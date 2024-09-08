@@ -12,7 +12,7 @@ import { THEME_COLORS } from "misc/constants";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { truncateTitle } from "utils/misc";
-import { useCart } from "components/Order/hooks";
+import { useCart } from "features/cart/hooks";
 
 interface Props {
     product: Product;
