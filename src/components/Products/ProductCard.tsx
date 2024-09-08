@@ -1,27 +1,17 @@
-import {
-    Badge,
-    Box,
-    Card,
-    IconButton,
-    Image,
-    Text,
-    VStack,
-} from "@chakra-ui/react";
-import { addToCart } from "components/Order/cartSlice";
+import { Badge, Box, Card, Image, Text, VStack } from "@chakra-ui/react";
 import { Product } from "features/product/types";
 import { THEME_COLORS } from "misc/constants";
-import { FaPlus } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { AppDispatch } from "store";
 import { truncateTitle } from "utils/misc";
+import { useCart } from "features/cart/hooks";
+import AnimatedAddToCartIcon from "./AnimatedAddToCartIcon";
 
 interface Props {
     product: Product;
 }
 
 const ProductCard: React.FC<Props> = ({ product }) => {
-    const dispatch = useDispatch<AppDispatch>();
+    const { addItemToCart } = useCart();
 
     const handleAddToCart = () => {
         const cartItem = {
@@ -37,12 +27,8 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     : product.categories[0]?.title || null,
             quantity: 1,
         };
-        dispatch(addToCart(cartItem));
+        addItemToCart(cartItem);
     };
-
-    // const isStockOut =
-    //     product.custom_stock_out_signal === true ||
-    //     product.available_stock === 0;
 
     const isStockOut = product.custom_stock_out_signal === true;
 
@@ -103,14 +89,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     >
                         <VStack>
                             <Text>৳{product.price}</Text>
-                            <IconButton
-                                aria-label="Add to cart"
-                                icon={<FaPlus />}
-                                color={THEME_COLORS.secondary}
-                                variant="solid"
-                                size="sm"
-                                onClick={handleAddToCart}
-                            />
+                            <AnimatedAddToCartIcon onClick={handleAddToCart} />
                         </VStack>
                     </Badge>
                 </Box>

@@ -1,18 +1,13 @@
 // src/components/Header/Cart.tsx
 
-import { Box, IconButton } from "@chakra-ui/react";
+import { Box, IconButton, Badge } from "@chakra-ui/react";
 import { THEME_COLORS } from "misc/constants";
 import { FaShoppingBasket } from "react-icons/fa";
-// import { useSelector } from "react-redux";
-// import { RootState } from "store";
 import { Link as RouterLink } from "react-router-dom";
+import { useCart } from "features/cart/hooks";
 
 const Cart = () => {
-    // const cartItems = useSelector((state: RootState) => state.cart.items);
-    // const totalItems = cartItems.reduce(
-    //     (total, item) => total + item.quantity,
-    //     0
-    // );
+    const { totalItems } = useCart();
 
     return (
         <Box position="relative">
@@ -26,7 +21,7 @@ const Cart = () => {
                 _hover={{ color: THEME_COLORS.secondary, borderRadius: 2 }}
                 icon={<FaShoppingBasket size={36} />}
             />
-            {/* {totalItems > 0 && (
+            {totalItems > 0 && (
                 <Badge
                     position="absolute"
                     top="-1"
@@ -43,7 +38,7 @@ const Cart = () => {
                 >
                     {totalItems}
                 </Badge>
-            )} */}
+            )}
         </Box>
     );
 };
