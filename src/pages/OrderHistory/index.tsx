@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import api from "features/order/api";
-import { Order } from "features/order/api";
+import { Order } from "features/order/types";
 
 const OrderHistory: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -60,7 +60,7 @@ const OrderHistory: React.FC = () => {
                                 ).toLocaleDateString()}
                             </Td>
                             <Td>{order.status}</Td>
-                            <Td>৳{order.total}</Td>
+                            <Td>৳{order.total_price}</Td>
                             <Td>
                                 <Button as={Link} to={`/orders/${order.id}`}>
                                     View Details

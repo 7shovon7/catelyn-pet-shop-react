@@ -1,35 +1,17 @@
 import axios from "axios";
 import { getCompleteUrl } from "utils/misc";
+import { OrderItemInput } from "./types";
 
-const API_URL = getCompleteUrl("/order/orders/");
-
-export interface OrderItem {
-    id: number;
-    product: any; // Adjust according to your Product type
-    quantity: number;
-    price: number;
-}
-
-export interface OrderItemInput {
-    product: number;
-    quantity: number;
-    price: number;
-}
-
-export interface Order {
-    id: number;
-    user: any; // Adjust according to your User type
-    created_at: string;
-    updated_at: string;
-    status: string;
-    total: number;
-    items: OrderItem[];
-}
+const API_URL = getCompleteUrl("/orders/list/");
 
 const createOrder = (orderData: { items: OrderItemInput[] }, token: string) => {
-    return axios.post(API_URL, orderData, {
-        headers: { Authorization: `JWT ${token}` },
-    });
+    return axios.post(
+        API_URL,
+        { items: orderData.items },
+        {
+            headers: { Authorization: `JWT ${token}` },
+        }
+    );
 };
 
 const getOrders = (token: string) => {

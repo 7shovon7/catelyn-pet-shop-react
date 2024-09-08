@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Box,
     Flex,
@@ -7,11 +7,13 @@ import {
     Text,
     VStack,
     Button,
+    useToast,
 } from "@chakra-ui/react";
 import CButton from "components/Regular/CButton";
 import { useCart } from "features/cart/hooks";
 import { useNavigate } from "react-router-dom";
-import api, { OrderItemInput } from "features/order/api";
+import api from "features/order/api";
+import { OrderItemInput } from "features/order/types";
 
 const Checkout: React.FC = () => {
     const {
@@ -23,30 +25,54 @@ const Checkout: React.FC = () => {
         clearCartItems,
     } = useCart();
     const navigate = useNavigate();
-    const token = localStorage.getItem("accessToken");
+    const toast = useToast();
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleCheckout = async () => {
+        const token = localStorage.getItem("accessToken");
+        if (!token) {
+            toast({
+                title: "Error",
+                description: "You must be logged in to place an order.",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            });
+            return;
+        }
+
+        setIsLoading(true);
         const orderData = {
             items: cartItems.map(
                 (item): OrderItemInput => ({
                     product: item.id,
                     quantity: item.quantity,
-                    price: item.price,
                 })
             ),
         };
 
-        if (token) {
-            try {
-                const response = await api.createOrder(orderData, token);
-                const orderId = response.data.id;
-                clearCartItems();
-                navigate(`/thank-you?order_id=${orderId}`);
-            } catch (error) {
-                console.error("Error creating order", error);
-            }
-        } else {
-            console.error("No access token found");
+        try {
+            const response = await api.createOrder(orderData, token);
+            const orderId = response.data.id;
+            clearCartItems();
+            navigate(`/thank-you?order_id=${orderId}`);
+            toast({
+                title: "Order placed successfully",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+            });
+        } catch (error) {
+            console.error("Error creating order", error);
+            toast({
+                title: "Error",
+                description: "Failed to place the order. Please try again.",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            });
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -132,8 +158,13 @@ const Checkout: React.FC = () => {
                             ৳{totalAmount.toFixed(2)}
                         </Text>
                     </Flex>
-                    <CButton onClick={handleCheckout}>
-                        Proceed to Confirm Order
+                    <CButton
+                        onClick={handleCheckout}
+                        disabled={isLoading || cartItems.length === 0}
+                    >
+                        {isLoading
+                            ? "Processing..."
+                            : "Proceed to Confirm Order"}
                     </CButton>
                 </>
             )}
