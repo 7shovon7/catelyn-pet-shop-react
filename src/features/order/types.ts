@@ -1,22 +1,24 @@
-export interface OrderItem {
-    id: number;
-    product: any; // Adjust according to your Product type
-    quantity: number;
-    price: number;
-}
-
 export interface OrderItemInput {
     product: number;
     quantity: number;
-    price: number;
+}
+
+export interface OrderItem {
+    id: number;
+    quantity: number;
+    selling_price_per_unit: number;
+    title: string;
 }
 
 export interface Order {
     id: number;
-    user: any; // Adjust according to your User type
+    customer: number;
+    title: string;
+    address: number | null;
+    total_price: number;
+    promo_code: number | null;
+    discounted_price: number | null;
     created_at: string;
-    updated_at: string;
     status: string;
-    total: number;
     items: OrderItem[];
 }

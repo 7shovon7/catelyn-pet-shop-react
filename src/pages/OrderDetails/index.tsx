@@ -1,10 +1,10 @@
 // src/pages/OrderDetails/index.tsx
 
 import React, { useEffect, useState } from "react";
-import { Box, Text, VStack, HStack, Image } from "@chakra-ui/react";
+import { Box, Text, VStack, HStack } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import api from "features/order/api";
-import { Order, OrderItem } from "features/order/api";
+import { Order, OrderItem } from "features/order/types";
 
 const OrderDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -41,20 +41,15 @@ const OrderDetails: React.FC = () => {
             <VStack spacing={4} align="stretch">
                 {order.items.map((item: OrderItem) => (
                     <HStack key={item.id} justifyContent="space-between">
-                        <Image
-                            src={item.product.image}
-                            alt={item.product.title}
-                            boxSize="50px"
-                        />
-                        <Text>{item.product.title}</Text>
-                        <Text>{item.quantity}</Text>
-                        <Text>৳{item.price}</Text>
+                        <Text>{item.title}</Text>
+                        <Text>Quantity: {item.quantity}</Text>
+                        <Text>৳{item.selling_price_per_unit}</Text>
                     </HStack>
                 ))}
             </VStack>
             <Box mt={8}>
                 <Text fontSize="lg" fontWeight="bold">
-                    Total: ৳{order.total}
+                    Total: ৳{order.total_price}
                 </Text>
             </Box>
         </Box>

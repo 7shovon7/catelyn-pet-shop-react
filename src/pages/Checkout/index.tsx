@@ -47,7 +47,6 @@ const Checkout: React.FC = () => {
                 (item): OrderItemInput => ({
                     product: item.id,
                     quantity: item.quantity,
-                    price: item.price,
                 })
             ),
         };
