@@ -71,6 +71,7 @@ const Footer = () => {
             paddingY={12}
             bottom={0}
             as="footer"
+            id="footer"
         >
             <Flex
                 direction={{ base: "column", sm: "row" }}
@@ -125,7 +126,7 @@ const Footer = () => {
                         <Text color="white">Orders</Text>
                     </RouterLink>
                 </VStack>
-                <VStack>
+                <VStack id="contacts">
                     <Text color={THEME_COLORS.secondary} fontWeight="bold">
                         Contacts
                     </Text>

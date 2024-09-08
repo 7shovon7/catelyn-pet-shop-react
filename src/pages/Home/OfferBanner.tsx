@@ -1,14 +1,14 @@
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { FaPaw } from "react-icons/fa";
 import CButton from "../../components/Regular/CButton";
-import { useNavigate } from "react-router-dom";
 import { THEME_COLORS } from "misc/constants";
 
 const OfferBanner = () => {
-    const navigate = useNavigate();
-
     const handleClick = () => {
-        navigate("/products");
+        const footer = document.getElementById("contacts");
+        if (footer) {
+            footer.scrollIntoView({ behavior: "smooth" });
+        }
     };
 
     return (
