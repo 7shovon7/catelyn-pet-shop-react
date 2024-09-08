@@ -1,7 +1,7 @@
-import SectionHeader from "../SectionHeader";
-import BlogGrid from "../../../components/Blogs/BlogGrid";
-import { useBlogs } from "features/blog/hooks";
 import { useEffect } from "react";
+import BlogGrid from "components/Blogs/BlogGrid";
+import { useBlogs } from "features/blog/hooks";
+import SectionWrapper from "components/Regular/SectionWrapper";
 
 const AllBlogs = () => {
     const { blogs, loading, totalCount, fetchBlogs } = useBlogs();
@@ -18,15 +18,14 @@ const AllBlogs = () => {
             : blogs.slice(offset, totalCount);
 
     return (
-        <>
-            <SectionHeader title="Pet Blogs" to="/blogs" />
+        <SectionWrapper title="Pet Blogs" to="/blogs">
             <BlogGrid
                 blogs={visibleBlogs}
                 loading={loading}
                 onLoadMore={() => fetchBlogs({ limit, offset: offset })}
                 hasMore={false}
             />
-        </>
+        </SectionWrapper>
     );
 };
 

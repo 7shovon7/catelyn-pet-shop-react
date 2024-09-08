@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import SectionHeader from "pages/Home/SectionHeader";
 import ProductGrid from "components/Products/ProductGrid";
 import { useProducts } from "features/product/hooks/useProducts";
+import SectionWrapper from "components/Regular/SectionWrapper";
 
 const AllProducts = () => {
     const { productsByCategory, loading, totalCountByCategory, fetchProducts } =
@@ -24,8 +24,7 @@ const AllProducts = () => {
         : [];
 
     return (
-        <>
-            <SectionHeader title="Furries Best Choice" to="/products" />
+        <SectionWrapper title="Furries Best Choice" to="/products">
             <ProductGrid
                 products={products}
                 loading={loading}
@@ -37,7 +36,7 @@ const AllProducts = () => {
                 }
                 hasMore={false}
             />
-        </>
+        </SectionWrapper>
     );
 };
 
