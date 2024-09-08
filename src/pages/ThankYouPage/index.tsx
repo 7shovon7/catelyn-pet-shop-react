@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Text, VStack, HStack, Image } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import api from "features/order/api";
-import { Order, OrderItem } from "features/order/api";
+import { Order, OrderItem } from "features/order/types";
 
 const ThankYou: React.FC = () => {
     const location = useLocation();
