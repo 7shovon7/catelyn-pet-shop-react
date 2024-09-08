@@ -1,66 +1,61 @@
 import React from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { RootState, AppDispatch } from "store";
 import {
     Box,
-    // Flex,
-    // HStack,
-    // Image,
+    Flex,
+    HStack,
+    Image,
     Text,
-    // VStack,
-    // Button,
+    VStack,
+    Button,
 } from "@chakra-ui/react";
-// import CButton from "components/Regular/CButton";
-// import {
-//     increaseQuantity,
-//     decreaseQuantity,
-//     removeFromCart,
-//     clearCart,
-// } from "components/Order/cartSlice";
-// import { useNavigate } from "react-router-dom";
-// import api, { OrderItemInput } from "features/order/api";
+import CButton from "components/Regular/CButton";
+import { useCart } from "components/Order/hooks";
+import { useNavigate } from "react-router-dom";
+import api, { OrderItemInput } from "features/order/api";
 
 const Checkout: React.FC = () => {
-    // const cartItems = useSelector((state: RootState) => state.cart.items);
-    // const totalAmount = cartItems.reduce(
-    //     (total, item) => total + item.price * item.quantity,
-    //     0
-    // );
-    // const dispatch = useDispatch<AppDispatch>();
-    // const navigate = useNavigate();
-    // const token = localStorage.getItem("accessToken");
+    const {
+        cartItems,
+        totalAmount,
+        removeItemFromCart,
+        increaseItemQuantity,
+        decreaseItemQuantity,
+        clearCartItems,
+    } = useCart();
+    const navigate = useNavigate();
+    const token = localStorage.getItem("accessToken");
 
-    // const handleCheckout = async () => {
-    //     const orderData = {
-    //         items: cartItems.map(
-    //             (item): OrderItemInput => ({
-    //                 product: item.id,
-    //                 quantity: item.quantity,
-    //                 price: item.price,
-    //             })
-    //         ),
-    //     };
+    const handleCheckout = async () => {
+        const orderData = {
+            items: cartItems.map(
+                (item): OrderItemInput => ({
+                    product: item.id,
+                    quantity: item.quantity,
+                    price: item.price,
+                })
+            ),
+        };
 
-    //     if (token) {
-    //         try {
-    //             const response = await api.createOrder(orderData, token);
-    //             const orderId = response.data.id;
-    //             dispatch(clearCart());
-    //             navigate(`/thank-you?order_id=${orderId}`);
-    //         } catch (error) {
-    //             console.error("Error creating order", error);
-    //         }
-    //     } else {
-    //         console.error("No access token found");
-    //     }
-    // };
+        if (token) {
+            try {
+                const response = await api.createOrder(orderData, token);
+                const orderId = response.data.id;
+                clearCartItems();
+                navigate(`/thank-you?order_id=${orderId}`);
+            } catch (error) {
+                console.error("Error creating order", error);
+            }
+        } else {
+            console.error("No access token found");
+        }
+    };
 
     return (
         <Box padding={8}>
             <Text fontSize="2xl" fontWeight="bold" mb={4}>
                 Checkout
             </Text>
-            {/* {cartItems.length === 0 ? (
+            {cartItems.length === 0 ? (
                 <Text>Your cart is empty.</Text>
             ) : (
                 <>
@@ -87,10 +82,8 @@ const Checkout: React.FC = () => {
                                             <Button
                                                 size="xs"
                                                 onClick={() =>
-                                                    dispatch(
-                                                        decreaseQuantity(
-                                                            item.id
-                                                        )
+                                                    decreaseItemQuantity(
+                                                        item.id
                                                     )
                                                 }
                                             >
@@ -100,10 +93,8 @@ const Checkout: React.FC = () => {
                                             <Button
                                                 size="xs"
                                                 onClick={() =>
-                                                    dispatch(
-                                                        increaseQuantity(
-                                                            item.id
-                                                        )
+                                                    increaseItemQuantity(
+                                                        item.id
                                                     )
                                                 }
                                             >
@@ -114,9 +105,7 @@ const Checkout: React.FC = () => {
                                             size="xs"
                                             colorScheme="red"
                                             onClick={() =>
-                                                dispatch(
-                                                    removeFromCart(item.id)
-                                                )
+                                                removeItemFromCart(item.id)
                                             }
                                         >
                                             Remove
@@ -147,7 +136,7 @@ const Checkout: React.FC = () => {
                         Proceed to Confirm Order
                     </CButton>
                 </>
-            )} */}
+            )}
         </Box>
     );
 };
