@@ -1,18 +1,10 @@
-import {
-    Badge,
-    Box,
-    Card,
-    IconButton,
-    Image,
-    Text,
-    VStack,
-} from "@chakra-ui/react";
+import { Badge, Box, Card, Image, Text, VStack } from "@chakra-ui/react";
 import { Product } from "features/product/types";
 import { THEME_COLORS } from "misc/constants";
-import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { truncateTitle } from "utils/misc";
 import { useCart } from "features/cart/hooks";
+import AnimatedAddToCartIcon from "./AnimatedAddToCartIcon";
 
 interface Props {
     product: Product;
@@ -97,14 +89,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     >
                         <VStack>
                             <Text>৳{product.price}</Text>
-                            <IconButton
-                                aria-label="Add to cart"
-                                icon={<FaPlus />}
-                                color={THEME_COLORS.secondary}
-                                variant="solid"
-                                size="sm"
-                                onClick={handleAddToCart}
-                            />
+                            <AnimatedAddToCartIcon onClick={handleAddToCart} />
                         </VStack>
                     </Badge>
                 </Box>
