@@ -30,7 +30,9 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         addItemToCart(cartItem);
     };
 
-    const isStockOut = product.custom_stock_out_signal === true;
+    const isStockOut =
+        product.custom_stock_out_signal === true ||
+        product.available_stock <= 0;
 
     const productBodyInCard = (
         <VStack spacing={2} paddingBottom={4} paddingX={4}>

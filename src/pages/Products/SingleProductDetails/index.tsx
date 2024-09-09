@@ -33,7 +33,9 @@ const SingleProductDetails: React.FC = () => {
 
     if (!product) return <Text>Loading...</Text>;
 
-    const isStockOut = product.custom_stock_out_signal === true;
+    const isStockOut =
+        product.custom_stock_out_signal === true ||
+        product.available_stock <= 0;
 
     return (
         <Box marginX={4}>
